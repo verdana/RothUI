@@ -1,0 +1,26 @@
+## Interface: 70200
+## Title: rTweaks
+## Version: 1.0.0
+## Author: Verdana
+## Notes: Small improvements to the default UI.
+## SavedVariables: QuestsDB, PetsDB
+
+rTweaks.lua
+
+modules\AutoGossip.lua
+modules\AutoQuest.lua
+modules\AutoRaidMode.lua
+modules\AutoShipment.lua
+modules\ChatFilter.lua
+modules\CombatAlert.lua
+modules\Command.lua
+modules\EquipItemLevel.lua
+modules\Font.lua
+modules\ImprovedMerchant.lua
+modules\ProfessionTabs.lua
+modules\ReagentBank.lua
+modules\TweakUI.lua
+modules\Vignette.lua
+
+modules\NomiCakes.lua
+
