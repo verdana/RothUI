@@ -2,16 +2,20 @@
 --- 需要自动接受，自动完成的日常任务列表
 local MarkedQuests = {
     -- 破碎群岛
-    [43994] = true,     -- 喂食塔莉萨
-    [43995] = true,     -- 喂食瓦尔托伊
-    [43106] = true,     -- 给欧库勒斯喂食
-
+    [42170] = true,     -- 织梦者
     [42233] = true,     -- 高岭诸族
     [42234] = true,     -- 瓦拉加尔
     [42420] = true,     -- 法罗迪斯宫廷
     [42421] = true,     -- 堕夜精灵
     [42422] = true,     -- 守望者
+
+    [46748] = true,     -- 堕夜精灵的物资
     [46749] = true,     -- 守望者的物资
+
+    [43994] = true,     -- 喂食塔莉萨
+    [43995] = true,     -- 喂食瓦尔托伊
+    [43106] = true,     -- 给欧库勒斯喂食
+    [44159] = true,     -- 马林的宝库赠品券
 
     [46997] = true,     -- 指挥中心之赐
     [47015] = true,     -- 虚空干扰器之赐
@@ -143,6 +147,14 @@ function AutoQuest:GOSSIP_SHOW(event)
 
     local availableQuests = { GetGossipAvailableQuests() }
     local activeQuests    = { GetGossipActiveQuests() }
+
+    for i = 1, #availableQuests, 7 do
+        local title = activeQuests[i+0]
+        if IsMarkedQuestByTitle(title) then
+            SelectGossipAvailableQuest(i)
+            return
+        end
+    end
 
     for i = 1, #activeQuests, 6 do
         local title      = activeQuests[i+0]
