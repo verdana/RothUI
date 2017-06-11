@@ -16,8 +16,8 @@ local rf3_BuffList, rf3_DebuffList, rf3_CooldownList = cfg.rf3_BuffList, cfg.rf3
 -----------------------------
 
 --petbattle handler
-local visibilityHandler = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-RegisterStateDriver(visibilityHandler, "visibility", "[petbattle][overridebar][vehicleui][possessbar,@vehicle,exists] hide; show")
+local VisibilityHandler = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+RegisterStateDriver(VisibilityHandler, "visibility", "[petbattle][overridebar][vehicleui][possessbar] hide; show")
 
 --format time func
 local function GetFormattedTime(time)
@@ -35,7 +35,7 @@ local function GetFormattedTime(time)
 end
 
 --number format func
-local numFormat = function(v)
+local NumberFormat = function(v)
     if v > 1E10 then
         return (floor(v/1E9)).."b"
     elseif v > 1E9 then
@@ -54,7 +54,7 @@ local numFormat = function(v)
 end
 
 --apply icon size change func
-local applySizeChange = function(i)
+local ApplySizeChange = function(i)
     local w = i:GetWidth()
     local h = i:GetHeight()
     if w < i.minsize then w = i.minsize end
@@ -70,7 +70,7 @@ local applySizeChange = function(i)
 end
 
 --generate the frame name if a global one is needed
-local makeFrameName = function(f,type)
+local MakeFrameName = function(f,type)
     if not f.move_ingame then return nil end
     local _, class = UnitClass("player")
     local spec = 0
@@ -78,7 +78,7 @@ local makeFrameName = function(f,type)
     return "rFilter3"..type.."Frame"..f.spellid.."Spec"..spec..class
 end
 
-local createIcon = function(f,index,type)
+local CreateIcon = function(f,index,type)
     local gsi_name, gsi_rank, gsi_icon, gsi_powerCost, gsi_isFunnel, gsi_powerType, gsi_castingTime, gsi_minRange, gsi_maxRange = GetSpellInfo(f.spellid)
 
     --check if the spellid exists
@@ -97,7 +97,7 @@ local createIcon = function(f,index,type)
         end
     end
 
-    local i = CreateFrame("FRAME",makeFrameName(f,type), visibilityHandler, "SecureHandlerStateTemplate")
+    local i = CreateFrame("FRAME", MakeFrameName(f,type), VisibilityHandler, "SecureHandlerStateTemplate")
     i:SetSize(f.size,f.size)
     i:SetPoint(f.pos.a1,f.pos.af,f.pos.a2,f.pos.x,f.pos.y)
     if f.framestrata then
@@ -155,8 +155,8 @@ local createIcon = function(f,index,type)
         rCreateDragResizeFrame(i, dragFrameList, -2 , true) --frame, dragFrameList, inset, clamp
     end
     --apply size change
-    i:SetScript("OnSizeChanged", applySizeChange)
-    applySizeChange(i)
+    i:SetScript("OnSizeChanged", ApplySizeChange)
+    ApplySizeChange(i)
 
     --visibility state
     if f.visibility_state then RegisterStateDriver(i, "visibility", f.visibility_state) end
@@ -173,7 +173,7 @@ local createIcon = function(f,index,type)
 end
 
 --check raid buff func
-local checkRaidBuff = function(f,index)
+local CheckRaidBuff = function(f,index)
     if not f.iconframe then return end
     if not f.iconframe:IsShown() then return end
     if f.spec and f.spec ~= GetSpecialization() then
@@ -240,7 +240,7 @@ local checkRaidBuff = function(f,index)
 end
 
 --check aura func
-local checkAura = function(f,filter,spellid)
+local CheckAura = function(f,filter,spellid)
     if not f.iconframe then return end
     if not f.iconframe:IsShown() then return end
     if f.spec and f.spec ~= GetSpecialization() then
@@ -317,7 +317,7 @@ local checkAura = function(f,filter,spellid)
                     value = value3
                 end
                 if value then
-                    f.iconframe.value:SetText(numFormat(value))
+                    f.iconframe.value:SetText((value))
                 end
             end
         else
@@ -341,7 +341,7 @@ local checkAura = function(f,filter,spellid)
 end
 
 --check cooldown func
-local checkCooldown = function(f)
+local CheckCooldown = function(f)
     if not f.iconframe then return end
     if not f.iconframe:IsShown() then return end
     if f.spec and f.spec ~= GetSpecialization() then
@@ -399,7 +399,7 @@ local checkCooldown = function(f)
 end
 
 --search aura func
-local searchAuras = function()
+local SearchAuras = function()
     --check buffs
     for i,_ in ipairs(rf3_BuffList) do
         local f = rf3_BuffList[i]
@@ -408,13 +408,13 @@ local searchAuras = function()
             f.aurafound = false
             for k,spellid in ipairs(f.spelllist) do
                 if not f.aurafound then
-                    checkAura(f,"HELPFUL",spellid)
+                    CheckAura(f,"HELPFUL",spellid)
                 end
             end
         elseif f.isRaidBuff then
-            checkRaidBuff(f,f.raidBuffIndex or 1)
+            CheckRaidBuff(f,f.raidBuffIndex or 1)
         else
-            checkAura(f,"HELPFUL")
+            CheckAura(f,"HELPFUL")
         end
     end
     --check debuffs
@@ -425,17 +425,17 @@ local searchAuras = function()
             f.aurafound = false
             for k,spellid in ipairs(f.spelllist) do
                 if not f.aurafound then
-                    checkAura(f,"HARMFUL",spellid)
+                    CheckAura(f,"HARMFUL",spellid)
                 end
             end
         else
-            checkAura(f,"HARMFUL")
+            CheckAura(f,"HARMFUL")
         end
     end
 end
 
 --search cooldown func
-local searchCooldowns = function()
+local SearchCooldowns = function()
     for i,_ in ipairs(rf3_CooldownList) do
         local f = rf3_CooldownList[i]
         --cooldowns get a new optional spelllist this we have to check the spellbook for matching spellids
@@ -451,7 +451,7 @@ local searchCooldowns = function()
                 end
             end
         end
-        checkCooldown(f)
+        CheckCooldown(f)
     end
 end
 
@@ -465,7 +465,7 @@ local cooldown_count = 0
 for i,_ in ipairs(rf3_BuffList) do
     local f = rf3_BuffList[i]
     if not f.icon then
-        createIcon(f,i,"Buff")
+        CreateIcon(f,i,"Buff")
     end
     aura_count=aura_count+1
 end
@@ -473,7 +473,7 @@ end
 for i,_ in ipairs(rf3_DebuffList) do
     local f = rf3_DebuffList[i]
     if not f.icon then
-        createIcon(f,i,"Debuff")
+        CreateIcon(f,i,"Debuff")
     end
     aura_count=aura_count+1
 end
@@ -481,23 +481,23 @@ end
 for i,_ in ipairs(rf3_CooldownList) do
     local f = rf3_CooldownList[i]
     if not f.icon then
-        createIcon(f,i,"Cooldown")
+        CreateIcon(f,i,"Cooldown")
     end
     cooldown_count=cooldown_count+1
 end
 
 if (aura_count+cooldown_count) > 0 then
-    local a = CreateFrame("Frame")
-    local ag = a:CreateAnimationGroup()
+    local a    = CreateFrame("Frame")
+    local ag   = a:CreateAnimationGroup()
     local anim = ag:CreateAnimation()
     anim:SetDuration(cfg.updatetime)
     ag:SetLooping("REPEAT")
     ag:SetScript("OnLoop", function(self, event, ...)
         if aura_count > 0 then
-            searchAuras()
+            SearchAuras()
         end
         if cooldown_count > 0 then
-            searchCooldowns()
+            SearchCooldowns()
         end
     end)
     ag:Play()
