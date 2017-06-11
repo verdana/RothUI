@@ -155,7 +155,7 @@ cfg.units = {
             },
         },
         altpower = {
-            show = false,
+            show = true,
             scale = 0.5,
             color = {r = 1, g = 0, b = 1, },
             texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
