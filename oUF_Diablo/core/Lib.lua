@@ -388,9 +388,9 @@ func.updateHealth = function(bar, unit, min, max)
     if d <= 25 or dead == 1 then
         bar.highlight:SetAlpha(0)
         if cfg.colorswitcher.useBrightForeground then
-            bar.glow:SetVertexColor(1,0,0,0.6)
-            bar:SetStatusBarColor(1,0,0,1)
-            bar.bg:SetVertexColor(0.2,0,0,0.9)
+            -- bar.glow:SetVertexColor(1,0,0,0.6)
+            -- bar:SetStatusBarColor(1/3, 1/3, 1/3, 0)
+            bar.bg:SetVertexColor(0.3,0.3,0.3,0.9)
         else
             bar.glow:SetVertexColor(1,0,0,1)
         end
@@ -399,7 +399,7 @@ func.updateHealth = function(bar, unit, min, max)
         bar.glow:SetVertexColor(0,0,0,0.7)
         bar.highlight:SetAlpha(cfg.highlightMultiplier)
     end
-    --bar.highlight:SetAlpha((min/max)*cfg.highlightMultiplier)
+    -- bar.highlight:SetAlpha((min/max)*cfg.highlightMultiplier)
 end
 
 --update power func

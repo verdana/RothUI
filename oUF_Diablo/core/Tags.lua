@@ -94,7 +94,7 @@ oUF.Tags.Methods["diablo:hpval"] = function(unit)
     local color = oUF.Tags.Methods["diablo:colorsimple"](unit)
     local hpval
     if UnitIsDeadOrGhost(unit) then
-        hpval = "Dead"
+        hpval = "" -- dead
     elseif not UnitIsConnected(unit) then
         hpval = "Offline"
     else
@@ -370,7 +370,7 @@ oUF.Tags.Events["cmaxspp"] = "UNIT_DISPLAYPOWER UNIT_POWER UNIT_MAXPOWER UNIT_CO
 oUF.Tags.Methods["perphp"] = function(unit)
     local perphp
     if UnitIsDeadOrGhost(unit) then
-        perphp = "Dead"
+        perphp = "" -- dead
     elseif not UnitIsConnected(unit) then
         perphp = "Offline"
     else
