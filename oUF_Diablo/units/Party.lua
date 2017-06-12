@@ -103,13 +103,13 @@ end
 
 --create health power strings
 local createHealthPowerStrings = function(self)
-    local name = func.createFontString(self.Health, cfg.font, self.cfg.misc.nameFontSize, "THINOUTLINE")
+    local name = func.CreateFontString(self.Health, cfg.font, self.cfg.misc.nameFontSize, "THINOUTLINE")
     name:SetPoint("BOTTOM", self, "TOP", 0, -13)
     name:SetPoint("LEFT", self.Health, 0, 0)
     name:SetPoint("RIGHT", self.Health, 0, 0)
     self.Name = name
 
-    local hpval = func.createFontString(self.Health, cfg.font, self.cfg.health.fontSize, "THINOUTLINE")
+    local hpval = func.CreateFontString(self.Health, cfg.font, self.cfg.health.fontSize, "THINOUTLINE")
     hpval:SetPoint(self.cfg.health.point, self.cfg.health.x,self.cfg.health.y)
 
     self:Tag(name, "[diablo:name]")
@@ -142,12 +142,12 @@ local function createStyle(self)
     createHealthPowerStrings(self)
 
     --health power update
-    self.Health.PostUpdate = func.updateHealth
-    self.Power.PostUpdate = func.updatePower
+    self.Health.PostUpdate = func.UpdateHealth
+    self.Power.PostUpdate = func.UpdatePower
 
     --create portrait
     if self.cfg.portrait.show then
-        func.createPortrait(self)
+        func.CreatePortrait(self)
         if self.PortraitHolder then
             if(InCombatLockdown()) then
                 self.PortraitHolder:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -167,19 +167,19 @@ local function createStyle(self)
 
     --auras
     if self.cfg.auras.show then
-        func.createDebuffs(self)
-        self.Debuffs.PostCreateIcon = func.createAuraIcon
-        func.createBuffs(self)
-        self.Buffs.PostCreateIcon = func.createAuraIcon
+        func.CreateDebuffs(self)
+        self.Debuffs.PostCreateIcon = func.CreateAuraIcon
+        func.CreateBuffs(self)
+        self.Buffs.PostCreateIcon = func.CreateAuraIcon
     end
 
     --aurawatch
     if self.cfg.aurawatch.show then
-        func.createAuraWatch(self)
+        func.CreateAuraWatch(self)
     end
 
     --debuffglow
-    func.createDebuffGlow(self)
+    func.CreateDebuffGlow(self)
 
     --range
     self.Range = {
@@ -188,30 +188,30 @@ local function createStyle(self)
     }
 
     --icons
-    self.RaidTargetIndicator = func.createIcon(self,"BACKGROUND",18,self.Name,"RIGHT","LEFT",0,0,-1)
-    self.ReadyCheckIndicator = func.createIcon(self.Health,"OVERLAY",24,self.Health,"CENTER","CENTER",0,0,-1)
+    self.RaidTargetIndicator = func.CreateIcon(self,"BACKGROUND",18,self.Name,"RIGHT","LEFT",0,0,-1)
+    self.ReadyCheckIndicator = func.CreateIcon(self.Health,"OVERLAY",24,self.Health,"CENTER","CENTER",0,0,-1)
     if self.Border then
-        self.LeaderIndicator = func.createIcon(self,"BACKGROUND",13,self.Border,"BOTTOMRIGHT","BOTTOMLEFT",16,18,-1)
+        self.LeaderIndicator = func.CreateIcon(self,"BACKGROUND",13,self.Border,"BOTTOMRIGHT","BOTTOMLEFT",16,18,-1)
         if self.cfg.portrait.use3D then
-            self.GroupRoleIndicator = func.createIcon(self.BorderHolder,"OVERLAY",12,self.Health,"CENTER","CENTER",0,0,5)
+            self.GroupRoleIndicator = func.CreateIcon(self.BorderHolder,"OVERLAY",12,self.Health,"CENTER","CENTER",0,0,5)
         else
-            self.GroupRoleIndicator = func.createIcon(self.PortraitHolder,"OVERLAY",12,self.Health,"CENTER","CENTER",0,0,5)
+            self.GroupRoleIndicator = func.CreateIcon(self.PortraitHolder,"OVERLAY",12,self.Health,"CENTER","CENTER",0,0,5)
         end
     else
-        self.LeaderIndicator = func.createIcon(self,"BACKGROUND",13,self,"RIGHT","LEFT",16,-18,-1)
-        self.GroupRoleIndicator = func.createIcon(self,"BACKGROUND",12,self,"RIGHT","LEFT",16,18,-1)
+        self.LeaderIndicator = func.CreateIcon(self,"BACKGROUND",13,self,"RIGHT","LEFT",16,-18,-1)
+        self.GroupRoleIndicator = func.CreateIcon(self,"BACKGROUND",12,self,"RIGHT","LEFT",16,18,-1)
     end
     self.GroupRoleIndicator:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\lfd_role")
     --self.GroupRoleIndicator:SetDesaturated(1)
 
     --add heal prediction
-    func.healthPrediction(self)
+    func.HealthPrediction(self)
 
     --add total absorb
-    func.totalAbsorb(self)
+    func.TotalAbsorb(self)
 
     --threat
-    self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", func.checkThreat)
+    self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", func.CheckThreat)
 end
 
 ---------------------------------------------
@@ -227,7 +227,7 @@ if cfg.units.party.show then
     local partyDragFrame = CreateFrame("Frame", "oUF_DiabloPartyDragFrame", UIParent)
     partyDragFrame:SetSize(50,50)
     partyDragFrame:SetPoint(cfg.units.party.pos.a1,cfg.units.party.pos.af,cfg.units.party.pos.a2,cfg.units.party.pos.x,cfg.units.party.pos.y)
-    func.applyDragFunctionality(partyDragFrame)
+    func.ApplyDragFunctionality(partyDragFrame)
     table.insert(oUF_Diablo_Units,"oUF_DiabloPartyDragFrame") --add frames to the slash command function
 
     if cfg.units.party.vertical == true then

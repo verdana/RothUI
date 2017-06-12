@@ -36,7 +36,7 @@ local initUnitParameters = function(self)
     self:RegisterForClicks("AnyDown")
     self:SetScript("OnEnter", UnitFrame_OnEnter)
     self:SetScript("OnLeave", UnitFrame_OnLeave)
-    func.applyDragFunctionality(self,"orb")
+    func.ApplyDragFunctionality(self,"orb")
 end
 
 --actionbar background
@@ -49,7 +49,7 @@ local createActionBarBackground = function(self)
     f:SetSize(512,256)
     f:SetPoint(cfg.pos.a1, cfg.pos.af, cfg.pos.a2, cfg.pos.x, cfg.pos.y)
     f:SetScale(cfg.scale)
-    func.applyDragFunctionality(f)
+    func.ApplyDragFunctionality(f)
     local t = f:CreateTexture(nil,"BACKGROUND",nil,-8)
     t:SetAllPoints(f)
     local setupBarTexture = function()
@@ -88,7 +88,7 @@ local createAngelFrame = function(self)
     f:SetFrameLevel(0)
     f:SetPoint(self.cfg.art.angel.pos.a1, self.cfg.art.angel.pos.af, self.cfg.art.angel.pos.a2, self.cfg.art.angel.pos.x, self.cfg.art.angel.pos.y)
     f:SetScale(self.cfg.art.angel.scale)
-    func.applyDragFunctionality(f)
+    func.ApplyDragFunctionality(f)
     local t = f:CreateTexture(nil,"BACKGROUND",nil,2)
     t:SetAllPoints(f)
     t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\d3_angel2")
@@ -103,7 +103,7 @@ local createDemonFrame = function(self)
     f:SetFrameLevel(0)
     f:SetPoint(self.cfg.art.demon.pos.a1, self.cfg.art.demon.pos.af, self.cfg.art.demon.pos.a2, self.cfg.art.demon.pos.x, self.cfg.art.demon.pos.y)
     f:SetScale(self.cfg.art.demon.scale)
-    func.applyDragFunctionality(f)
+    func.ApplyDragFunctionality(f)
     local t = f:CreateTexture(nil,"BACKGROUND",nil,2)
     t:SetAllPoints(f)
     t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\d3_demon2")
@@ -119,7 +119,7 @@ local createBottomLine = function(self)
     f:SetSize(500,112)
     f:SetPoint(cfg.pos.a1, cfg.pos.af, cfg.pos.a2, cfg.pos.x, cfg.pos.y)
     f:SetScale(cfg.scale)
-    func.applyDragFunctionality(f, "bottomline")
+    func.ApplyDragFunctionality(f, "bottomline")
     local t = f:CreateTexture(nil,"BACKGROUND",nil,3)
     t:SetAllPoints(f)
     t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\d3_bottom")
@@ -223,7 +223,7 @@ local createOrb = function(self,type)
         --reset the power to be on the opposite side of the health orb
         orb:SetPoint(self.cfg.pos.a1,self.cfg.pos.af,self.cfg.pos.a2,self.cfg.pos.x*(-1),self.cfg.pos.y)
         --make the power orb dragable
-        func.applyDragFunctionality(orb,"orb")
+        func.ApplyDragFunctionality(orb,"orb")
     else
         --position the health orb ontop of the self object
         orb:SetPoint("CENTER")
@@ -356,11 +356,11 @@ local createOrb = function(self,type)
     local values = CreateFrame("Frame","$parentValues",overlay)
     values:SetAllPoints(orb)
     --top value
-    values.top = func.createFontString(values, cfg.font, 28, "THINOUTLINE")
+    values.top = func.CreateFontString(values, cfg.font, 28, "THINOUTLINE")
     values.top:SetPoint("CENTER", 0, 10)
     values.top:SetTextColor(orbcfg.value.top.color.r,orbcfg.value.top.color.g,orbcfg.value.top.color.b)
     --bottom value
-    values.bottom = func.createFontString(values, cfg.font, 16, "THINOUTLINE")
+    values.bottom = func.CreateFontString(values, cfg.font, 16, "THINOUTLINE")
     values.bottom:SetPoint("CENTER", 0, -10)
     values.bottom:SetTextColor(orbcfg.value.top.color.r,orbcfg.value.top.color.g,orbcfg.value.top.color.b)
     orb.values = values
@@ -477,21 +477,21 @@ local createStyle = function(self)
     --icons
     if self.cfg.icons.resting.show then
         local pos = self.cfg.icons.resting.pos
-        self.RestingIndicator = func.createIcon(self,"TOOLTIP",32,self,pos.a1,pos.a2,pos.x,pos.y,-1)
+        self.RestingIndicator = func.CreateIcon(self,"TOOLTIP",32,self,pos.a1,pos.a2,pos.x,pos.y,-1)
     end
     if self.cfg.icons.pvp.show then
         local pos = self.cfg.icons.pvp.pos
-        self.PvPIndicator = func.createIcon(self,"TOOLTIP",32,self,pos.a1,pos.a2,pos.x,pos.y,-1)
+        self.PvPIndicator = func.CreateIcon(self,"TOOLTIP",32,self,pos.a1,pos.a2,pos.x,pos.y,-1)
     end
     if self.cfg.icons.combat.show then
         local pos = self.cfg.icons.combat.pos
-        self.CombatIndicator = func.createIcon(self,"TOOLTIP",32,self,pos.a1,pos.a2,pos.x,pos.y,-1)
+        self.CombatIndicator = func.CreateIcon(self,"TOOLTIP",32,self,pos.a1,pos.a2,pos.x,pos.y,-1)
     end
 
     --castbar
     if self.cfg.castbar.show then
         --load castingbar
-        func.createCastbar(self)
+        func.CreateCastbar(self)
     elseif self.cfg.castbar.hideDefault then
         CastingBarFrame:UnregisterAllEvents()
         CastingBarFrame.Show = CastingBarFrame.Hide
@@ -531,12 +531,12 @@ local createStyle = function(self)
 
     --create portrait
     if self.cfg.portrait.show then
-        func.createStandAlonePortrait(self)
+        func.CreateStandAlonePortrait(self)
     end
 
     --make alternative power bar movable
     if self.cfg.altpower.show then
-        func.createAlternativePower(self,"oUF_AltPowerPlayer")
+        func.CreateAlternativePower(self,"oUF_AltPowerPlayer")
     end
 
     --add self to unit container (maybe access to that unit is needed in another style)

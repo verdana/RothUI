@@ -28,7 +28,7 @@ local initUnitParameters = function(self)
     self:RegisterForClicks("AnyDown")
     self:SetScript("OnEnter", UnitFrame_OnEnter)
     self:SetScript("OnLeave", UnitFrame_OnLeave)
-    func.applyDragFunctionality(self)
+    func.ApplyDragFunctionality(self)
 end
 
 --actionbar background
@@ -95,13 +95,13 @@ end
 
 --create health power strings
 local createHealthPowerStrings = function(self)
-    local name = func.createFontString(self, cfg.font, 14, "THINOUTLINE")
+    local name = func.CreateFontString(self, cfg.font, 14, "THINOUTLINE")
     name:SetPoint("BOTTOM", self, "TOP", 0, -13)
     name:SetPoint("LEFT", self.Health, 0, 0)
     name:SetPoint("RIGHT", self.Health, 0, 0)
     self.Name = name
 
-    local hpval = func.createFontString(self.Health, cfg.font, 11, "THINOUTLINE")
+    local hpval = func.CreateFontString(self.Health, cfg.font, 11, "THINOUTLINE")
     hpval:SetPoint("RIGHT", -2,0)
 
     self:Tag(name, "[diablo:name]")
@@ -134,49 +134,49 @@ local function createStyle(self)
     createHealthPowerStrings(self)
 
     --health power update
-    self.Health.PostUpdate = func.updateHealth
-    self.Power.PostUpdate = func.updatePower
+    self.Health.PostUpdate = func.UpdateHealth
+    self.Power.PostUpdate = func.UpdatePower
 
     --create portrait
     if self.cfg.portrait.show then
-        func.createPortrait(self)
+        func.CreatePortrait(self)
         self:SetHitRectInsets(0, 0, -100, 0);
     end
 
     --castbar
     if self.cfg.castbar.show then
-        func.createCastbar(self)
+        func.CreateCastbar(self)
     end
 
     --auras
     if self.cfg.auras.show then
-        func.createDebuffs(self)
-        self.Debuffs.PostCreateIcon = func.createAuraIcon
+        func.CreateDebuffs(self)
+        self.Debuffs.PostCreateIcon = func.CreateAuraIcon
         if self.cfg.auras.showBuffs then
-            func.createBuffs(self)
-            self.Buffs.PostCreateIcon = func.createAuraIcon
+            func.CreateBuffs(self)
+            self.Buffs.PostCreateIcon = func.CreateAuraIcon
         end
     end
 
     --aurawatch
     if self.cfg.aurawatch.show then
-        func.createAuraWatch(self)
+        func.CreateAuraWatch(self)
     end
 
     --debuffglow
-    func.createDebuffGlow(self)
+    func.CreateDebuffGlow(self)
 
     --threat
-    self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", func.checkThreat)
+    self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", func.CheckThreat)
 
     --icons
-    self.RaidTargetIndicator = func.createIcon(self,"BACKGROUND",18,self.Name,"BOTTOM","TOP",0,0,-1)
+    self.RaidTargetIndicator = func.CreateIcon(self,"BACKGROUND",18,self.Name,"BOTTOM","TOP",0,0,-1)
 
     --add heal prediction
-    func.healthPrediction(self)
+    func.HealthPrediction(self)
 
     --add total absorb
-    func.totalAbsorb(self)
+    func.TotalAbsorb(self)
 
     --add self to unit container (maybe access to that unit is needed in another style)
     unit.focus = self

@@ -87,7 +87,7 @@ local createAuras = function(self)
 end
 
 --aura icon func
-local createAuraIcon = function(icons, button)
+local CreateAuraIcon = function(icons, button)
     --button:EnableMouse(false)
     local bw = button:GetWidth()
     if button.cd then
@@ -110,7 +110,7 @@ local createAuraIcon = function(icons, button)
 end
 
 --create aura watch func
-local createAuraWatch = function(self)
+local CreateAuraWatch = function(self)
     local auras = {}
     local spellIDs
     if cfg.playerclass == "PRIEST" then
@@ -206,7 +206,7 @@ local createAuraWatch = function(self)
 end
 
 --update health func
-local updateHealth = function(bar, unit, min, max)
+local UpdateHealth = function(bar, unit, min, max)
     local d = floor(min/max*100)
     local color
     local dead
@@ -261,7 +261,7 @@ local updateHealth = function(bar, unit, min, max)
 end
 
 --check threat
-local checkThreat = function(self,event,unit)
+local CheckThreat = function(self,event,unit)
     self.Health:ForceUpdate()
 end
 
@@ -316,14 +316,14 @@ end
 
 --create health power strings
 local createHealthPowerStrings = function(self)
-    local name = func.createFontString(self, cfg.font, 12, "THINOUTLINE")
+    local name = func.CreateFontString(self, cfg.font, 12, "THINOUTLINE")
     name:SetPoint("BOTTOM", self, "TOP", 0, -14)
     name:SetPoint("LEFT", self.Health, 0, 0)
     name:SetPoint("RIGHT", self.Health, 0, 0)
     --name:SetJustifyH("LEFT")
     self.Name = name
 
-    local hpval = func.createFontString(self.Health, cfg.font, 11, "THINOUTLINE")
+    local hpval = func.CreateFontString(self.Health, cfg.font, 11, "THINOUTLINE")
     hpval:SetPoint("RIGHT", -2,0)
 
     self:Tag(name, "[diablo:name]")
@@ -382,12 +382,12 @@ local function createStyle(self)
     createHealthPowerStrings(self)
 
     --health update
-    self.Health.PostUpdate = updateHealth
-    self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", checkThreat)
-    self.Power.PostUpdate = func.updatePower
+    self.Health.PostUpdate = UpdateHealth
+    self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", CheckThreat)
+    self.Power.PostUpdate = func.UpdatePower
 
     --debuffglow
-    func.createDebuffGlow(self)
+    func.CreateDebuffGlow(self)
 
     --range
     self.Range = {
@@ -398,26 +398,26 @@ local function createStyle(self)
     --auras
     if self.cfg.auras.show then
         createAuras(self)
-        self.Auras.PostCreateIcon = createAuraIcon
+        self.Auras.PostCreateIcon = CreateAuraIcon
     end
 
     --aurawatch
     if self.cfg.aurawatch.show then
-        createAuraWatch(self)
+        CreateAuraWatch(self)
     end
 
     --icons
-    self.RaidTargetIndicator = func.createIcon(self.Health,"TOOLTIP",14,self.Health,"CENTER","CENTER",0,0,-1)
-    self.ReadyCheckIndicator = func.createIcon(self.Health,"TOOLTIP",24,self.Health,"CENTER","CENTER",0,0,-1)
-    self.GroupRoleIndicator = func.createIcon(self.Health,"OVERLAY",14,self.Health,"CENTER","CENTER",0,0,-1)
+    self.RaidTargetIndicator = func.CreateIcon(self.Health,"TOOLTIP",14,self.Health,"CENTER","CENTER",0,0,-1)
+    self.ReadyCheckIndicator = func.CreateIcon(self.Health,"TOOLTIP",24,self.Health,"CENTER","CENTER",0,0,-1)
+    self.GroupRoleIndicator = func.CreateIcon(self.Health,"OVERLAY",14,self.Health,"CENTER","CENTER",0,0,-1)
     self.GroupRoleIndicator:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\lfd_role")
     self.GroupRoleIndicator:SetDesaturated(1)
 
     --add heal prediction
-    func.healthPrediction(self)
+    func.HealthPrediction(self)
 
     --add total absorb
-    func.totalAbsorb(self)
+    func.TotalAbsorb(self)
 end
 
 ---------------------------------------------
@@ -438,7 +438,7 @@ if cfg.units.raid.show then
         local raidDragFrame = CreateFrame("Frame", "oUF_DiabloRaidDragFrame"..i, UIParent)
         raidDragFrame:SetSize(50,50)
         raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,cfg.units.raid.pos.x,cfg.units.raid.pos.y)
-        func.applyDragFunctionality(raidDragFrame)
+        func.ApplyDragFunctionality(raidDragFrame)
         table.insert(oUF_Diablo_Units,"oUF_DiabloRaidDragFrame"..i) --add frames to the slash command function
         group = oUF:SpawnHeader(
         name,

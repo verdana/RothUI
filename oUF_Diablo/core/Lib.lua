@@ -23,7 +23,7 @@ local tinsert, tremove, floor, mod, format = tinsert, tremove, floor, mod, forma
 ---------------------------------------------
 
 --number format func
-func.numFormat = function(v)
+func.NumberFormat = function(v)
     if v > 1E10 then
         return (floor(v/1E9)).."b"
     elseif v > 1E9 then
@@ -42,7 +42,7 @@ func.numFormat = function(v)
 end
 
 --round number
-func.round = function(val)
+func.Round = function(val)
     return floor(val*1000)/1000
 end
 
@@ -66,14 +66,14 @@ func.GetFormattedTime = function(time)
 end
 
 --backdrop func
-func.createBackdrop = function(f)
+func.CreateBackdrop = function(f)
     f:SetBackdrop(cfg.backdrop)
     f:SetBackdropColor(0,0,0,0.7)
     f:SetBackdropBorderColor(0,0,0,1)
 end
 
 --create debuff func
-func.createDebuffs = function(self)
+func.CreateDebuffs = function(self)
     if self.cfg.vertical then
         local f = CreateFrame("Frame", nil, self)
         f.size = self.cfg.auras.size
@@ -114,7 +114,7 @@ func.createDebuffs = function(self)
 end
 
 --create buff func
-func.createBuffs = function(self)
+func.CreateBuffs = function(self)
     if self.cfg.vertical then
         local f = CreateFrame("Frame", nil, self)
         f.size = self.cfg.auras.size
@@ -155,7 +155,7 @@ func.createBuffs = function(self)
 end
 
 --Desaturated and Button CD
-func.postUpdateDebuff = function(element, unit, button, index, duration, expirationTime)
+func.PostUpdateDebuff = function(element, unit, button, index, duration, expirationTime)
     if(UnitIsFriend("player", unit) or button.isPlayer) then
         button.icon:SetDesaturated(false)
         --button.cd:Show()
@@ -169,7 +169,7 @@ func.postUpdateDebuff = function(element, unit, button, index, duration, expirat
 end
 
 --aura icon func
-func.createAuraIcon = function(icons, button)
+func.CreateAuraIcon = function(icons, button)
     --button:SetSize(icons.size,icons.size)
     --button.cd:SetReverse()
     local size = icons.size or button:GetWidth()
@@ -204,7 +204,7 @@ func.createAuraIcon = function(icons, button)
 end
 
 --create AlternativePower
-func.createAlternativePower = function(self,name)
+func.CreateAlternativePower = function(self,name)
     local t,f
     local num = 4
     local w = 64*num
@@ -247,18 +247,18 @@ func.createAlternativePower = function(self,name)
     t:SetBlendMode("BLEND")
     t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_highlight2")
 
-    f = func.createFontString(g, cfg.font, 24, "THINOUTLINE")
+    f = func.CreateFontString(g, cfg.font, 24, "THINOUTLINE")
     f:SetPoint("CENTER", 0, 0)
     f:SetTextColor(0.8,0.8,0.8)
     self:Tag(f, "[diablo:altpower]")
 
     bar:SetScale(self.cfg.altpower.scale)
-    func.simpleDragFunc(bar)
+    func.SimpleDragFunc(bar)
     self.AlternativePower = bar
 end
 
 --create aura watch func
-func.createAuraWatch = function(self)
+func.CreateAuraWatch = function(self)
     local auras = {}
     local spellIDs
     if cfg.playerclass == "PRIEST" then --Priest
@@ -312,7 +312,7 @@ func.createAuraWatch = function(self)
 
     auras.onlyShowPresent = false
     auras.presentAlpha = 1
-    auras.PostCreateIcon = func.createAuraIcon
+    auras.PostCreateIcon = func.CreateAuraIcon
 
     -- Set any other AuraWatch settings
     auras.icons = {}
@@ -339,14 +339,14 @@ func.createAuraWatch = function(self)
             icon.cd = cd
         end
     end
-    auras.PostCreateIcon = func.createAuraIcon
+    auras.PostCreateIcon = func.CreateAuraIcon
 
     --call aurawatch
     self.AuraWatch = auras
 end
 
 --update health func
-func.updateHealth = function(bar, unit, min, max)
+func.UpdateHealth = function(bar, unit, min, max)
     local d = floor(min/max*100)
     local color
     local dead
@@ -403,7 +403,7 @@ func.updateHealth = function(bar, unit, min, max)
 end
 
 --update power func
-func.updatePower = function(bar, unit, min, max)
+func.UpdatePower = function(bar, unit, min, max)
     local color = cfg.powercolors[select(2, UnitPowerType(unit))]
     if not color then
         --prevent powertype from bugging out on certain encounters.
@@ -414,7 +414,7 @@ func.updatePower = function(bar, unit, min, max)
 end
 
 --debuffglow
-func.createDebuffGlow = function(self)
+func.CreateDebuffGlow = function(self)
     local t = self:CreateTexture(nil,"LOW",nil,-5)
     if self.cfg.style == "target" then
         t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\target_debuffglow")
@@ -430,7 +430,7 @@ func.createDebuffGlow = function(self)
 end
 
 --check threat
-func.checkThreat = function(self,event,unit)
+func.CheckThreat = function(self,event,unit)
     if unit then
         if self.unit ~= unit then return end
         local threat = UnitThreatSituation(unit)
@@ -450,7 +450,7 @@ func.checkThreat = function(self,event,unit)
 end
 
 --create portrait func
-func.createPortrait = function(self)
+func.CreatePortrait = function(self)
     local back = CreateFrame("Frame",nil,self)
     back:SetSize(self.cfg.width,self.cfg.width)
 
@@ -561,7 +561,7 @@ func.createPortrait = function(self)
 end
 
 --create standalone portrait func
-func.createStandAlonePortrait = function(self)
+func.CreateStandAlonePortrait = function(self)
     local fname
     if self.cfg.style == "player" then
         fname = "oUF_DiabloPlayerPortrait"
@@ -575,7 +575,7 @@ func.createStandAlonePortrait = function(self)
     back:SetSize(pcfg.size,pcfg.size)
     back:SetPoint(pcfg.pos.a1,pcfg.pos.af,pcfg.pos.a2,pcfg.pos.x,pcfg.pos.y)
 
-    func.applyDragFunctionality(back)
+    func.ApplyDragFunctionality(back)
 
     local t = back:CreateTexture(nil,"BACKGROUND",nil,-8)
     t:SetAllPoints(back)
@@ -620,7 +620,7 @@ func.createStandAlonePortrait = function(self)
 end
 
 --create castbar func
-func.createCastbar = function(f)
+func.CreateCastbar = function(f)
     local c = CreateFrame("StatusBar", "$parentCastbar", f)
     --wow is this outdated...man I really need to rewrite how the drag stuff is handled
     tinsert(oUF_Diablo_Bars,c:GetName())
@@ -643,11 +643,11 @@ func.createCastbar = function(f)
     c.bg:SetAllPoints(c)
     c.bg:SetVertexColor(f.cfg.castbar.color.bg.r,f.cfg.castbar.color.bg.g,f.cfg.castbar.color.bg.b,f.cfg.castbar.color.bg.a)
 
-    c.Text =  func.createFontString(c, cfg.font, f.cfg.castbar.fontSize, "THINOUTLINE")
+    c.Text =  func.CreateFontString(c, cfg.font, f.cfg.castbar.fontSize, "THINOUTLINE")
     c.Text:SetPoint("LEFT", 5, 0)
     c.Text:SetJustifyH("LEFT")
 
-    c.Time =  func.createFontString(c, cfg.font, f.cfg.castbar.fontSize, "THINOUTLINE")
+    c.Time =  func.CreateFontString(c, cfg.font, f.cfg.castbar.fontSize, "THINOUTLINE")
     c.Time:SetPoint("RIGHT", -2, 0)
 
     c.Text:SetPoint("RIGHT", -50, 0)
@@ -686,12 +686,12 @@ func.createCastbar = function(f)
         c.SafeZone:SetPoint("BOTTOMRIGHT")
     end
 
-    func.applyDragFunctionality(c)
+    func.ApplyDragFunctionality(c)
     f.Castbar = c
 end
 
 --fontstring func
-func.createFontString = function(f, font, size, outline,layer)
+func.CreateFontString = function(f, font, size, outline,layer)
     local fs = f:CreateFontString(nil, layer or "OVERLAY")
     fs:SetFont(font, size, outline)
     fs:SetShadowColor(0,0,0,1)
@@ -699,7 +699,7 @@ func.createFontString = function(f, font, size, outline,layer)
 end
 
 --allows frames to become movable but frames can be locked or set to default positions
-func.applyDragFunctionality = function(f,special)
+func.ApplyDragFunctionality = function(f,special)
     --save the default position
     local getPoint = function(self)
         local pos = {}
@@ -748,7 +748,7 @@ func.applyDragFunctionality = function(f,special)
 end
 
 --simple frame movement
-func.simpleDragFunc = function(f)
+func.SimpleDragFunc = function(f)
     f:SetHitRectInsets(-15,-15,-15,-15)
     f:SetClampedToScreen(true)
     f:SetMovable(true)
@@ -770,7 +770,7 @@ func.simpleDragFunc = function(f)
 end
 
 --create icon func
-func.createIcon = function(f,layer,size,anchorframe,anchorpoint1,anchorpoint2,posx,posy,sublevel)
+func.CreateIcon = function(f,layer,size,anchorframe,anchorpoint1,anchorpoint2,posx,posy,sublevel)
     local icon = f:CreateTexture(nil,layer,nil,sublevel)
     icon:SetSize(size,size)
     icon:SetPoint(anchorpoint1,anchorframe,anchorpoint2,posx,posy)
@@ -778,7 +778,7 @@ func.createIcon = function(f,layer,size,anchorframe,anchorpoint1,anchorpoint2,po
 end
 
 --heal prediction
-func.healthPrediction = function(self)
+func.HealthPrediction = function(self)
     if not self.cfg.healthprediction or (self.cfg.healthprediction and not self.cfg.healthprediction.show) then return end
     local w = self.Health:GetWidth()
     if w == 0 then
@@ -809,7 +809,7 @@ func.healthPrediction = function(self)
 end
 
 --total absorb
-func.totalAbsorb = function(self)
+func.TotalAbsorb = function(self)
     if not self.cfg.totalabsorb or (self.cfg.totalabsorb and not self.cfg.totalabsorb.show) then return end
 
     local w = self.Health:GetWidth()

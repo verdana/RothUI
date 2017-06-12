@@ -26,7 +26,7 @@ local initUnitParameters = function(self)
     self:RegisterForClicks("AnyDown")
     self:SetScript("OnEnter", UnitFrame_OnEnter)
     self:SetScript("OnLeave", UnitFrame_OnLeave)
-    func.applyDragFunctionality(self)
+    func.ApplyDragFunctionality(self)
     self:SetHitRectInsets(10, 10, 10, 10)
 end
 
@@ -126,25 +126,25 @@ end
 
 --create health power strings
 local createHealthPowerStrings = function(self)
-    local name = func.createFontString(self, cfg.font, self.cfg.misc.nameFontSize, "THINOUTLINE")
+    local name = func.CreateFontString(self, cfg.font, self.cfg.misc.nameFontSize, "THINOUTLINE")
     name:SetPoint("BOTTOM", self, "TOP", 0, 0)
     name:SetPoint("LEFT", self.Health, 0, 0)
     name:SetPoint("RIGHT", self.Health, 0, 0)
     self.Name = name
 
-    local hpval = func.createFontString(self.Health, cfg.font, self.cfg.health.fontSize, "THINOUTLINE")
+    local hpval = func.CreateFontString(self.Health, cfg.font, self.cfg.health.fontSize, "THINOUTLINE")
     hpval:SetPoint(self.cfg.health.point, self.cfg.health.x, self.cfg.health.y)
 
-    local perphp = func.createFontString(self.Health, cfg.font, self.cfg.healper.fontSize, "THINOUTLINE")
+    local perphp = func.CreateFontString(self.Health, cfg.font, self.cfg.healper.fontSize, "THINOUTLINE")
     perphp:SetPoint(self.cfg.healper.point, self.cfg.healper.x, self.cfg.healper.y)
 
-    local perpp = func.createFontString(self.Health, cfg.font, self.cfg.powper.fontSize, "THINOUTLINE")
+    local perpp = func.CreateFontString(self.Health, cfg.font, self.cfg.powper.fontSize, "THINOUTLINE")
     perpp:SetPoint(self.cfg.powper.point, self.cfg.powper.x, self.cfg.powper.y)
 
-    local ppval = func.createFontString(self.Health, cfg.font, self.cfg.power.fontSize, "THINOUTLINE")
+    local ppval = func.CreateFontString(self.Health, cfg.font, self.cfg.power.fontSize, "THINOUTLINE")
     ppval:SetPoint(self.cfg.power.point, self.cfg.power.x, self.cfg.power.y)
 
-    local classtext = func.createFontString(self, cfg.font, self.cfg.misc.classFontSize, "THINOUTLINE")
+    local classtext = func.CreateFontString(self, cfg.font, self.cfg.misc.classFontSize, "THINOUTLINE")
     classtext:SetPoint("BOTTOM", self, "TOP", 0, -15)
 
     self:Tag(name, "[diablo:name]")
@@ -183,7 +183,7 @@ local checkChannel = function(bar, unit, name, rank)
 end
 
 --create buffs
-local createBuffs = function(self)
+local CreateBuffs = function(self)
     local f = CreateFrame("Frame", nil, self)
     f.size = self.cfg.auras.size
     f.num = 40
@@ -200,7 +200,7 @@ local createBuffs = function(self)
 end
 
 --create debuff func
-local createDebuffs = function(self)
+local CreateDebuffs = function(self)
     local f = CreateFrame("Frame", nil, self)
     f.size = self.cfg.auras.size
     f.num = 40
@@ -303,23 +303,23 @@ local function createStyle(self)
     createHealthPowerStrings(self)
 
     --health power update
-    self.Health.PostUpdate = func.updateHealth
-    self.Power.PostUpdate = func.updatePower
+    self.Health.PostUpdate = func.UpdateHealth
+    self.Power.PostUpdate = func.UpdatePower
 
     --auras
     if self.cfg.auras.show then
-        createBuffs(self)
-        createDebuffs(self)
-        self.Buffs.PostCreateIcon = func.createAuraIcon
-        self.Debuffs.PostCreateIcon = func.createAuraIcon
+        CreateBuffs(self)
+        CreateDebuffs(self)
+        self.Buffs.PostCreateIcon = func.CreateAuraIcon
+        self.Debuffs.PostCreateIcon = func.CreateAuraIcon
         if self.cfg.auras.desaturateDebuffs then
-            self.Debuffs.PostUpdateIcon = func.postUpdateDebuff
+            self.Debuffs.PostUpdateIcon = func.PostUpdateDebuff
         end
     end
 
     --castbar
     if self.cfg.castbar.show then
-        func.createCastbar(self)
+        func.CreateCastbar(self)
         self.Castbar.cfg = self.cfg.castbar
         self.Castbar.PostCastStart = checkCast
         self.Castbar.PostChannelStart = checkChannel
@@ -327,21 +327,21 @@ local function createStyle(self)
     end
 
     --debuffglow
-    func.createDebuffGlow(self)
+    func.CreateDebuffGlow(self)
 
     --icons
-    self.RaidTargetIndicator = func.createIcon(self, "BACKGROUND", 24, self.Name, "BOTTOM", "TOP", 0, 0, -1)
+    self.RaidTargetIndicator = func.CreateIcon(self, "BACKGROUND", 24, self.Name, "BOTTOM", "TOP", 0, 0, -1)
 
     --create portrait
     if self.cfg.portrait.show then
-        func.createStandAlonePortrait(self)
+        func.CreateStandAlonePortrait(self)
     end
 
     --add heal prediction
-    func.healthPrediction(self)
+    func.HealthPrediction(self)
 
     --add total absorb
-    func.totalAbsorb(self)
+    func.TotalAbsorb(self)
 
     --add self to unit container (maybe access to that unit is needed in another style)
     unit.target = self

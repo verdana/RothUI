@@ -35,7 +35,7 @@ bars.CreateExpBar = function(self)
     r:SetStatusBarTexture(cfg.texture)
     r:SetStatusBarColor(cfg.rested.color.r,cfg.rested.color.g,cfg.rested.color.b)
 
-    func.applyDragFunctionality(f)
+    func.ApplyDragFunctionality(f)
 
     local t = r:CreateTexture(nil,"BACKGROUND",nil,-8)
     t:SetAllPoints(r)
@@ -79,7 +79,7 @@ bars.CreateRepBar = function(self)
     ReputationBar:SetStatusBarTexture(cfg.texture)
     ReputationBar:SetStatusBarColor(0,0.7,0)
 
-    func.applyDragFunctionality(ReputationBar)
+    func.ApplyDragFunctionality(ReputationBar)
 
     local ReputationBack = ReputationBar:CreateTexture(nil,"BACKGROUND",nil,-8)
     ReputationBack:SetAllPoints(ReputationBar)
@@ -222,7 +222,7 @@ bars.CreateArcaneChargesPowerBar = function(self)
     end
 
     bar:SetScale(self.cfg.arcanecharges.scale)
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.arcanecharges.combat.enable then
         rCombatFrameFader(bar, self.cfg.arcanecharges.combat.fadeIn, self.cfg.arcanecharges.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
@@ -315,7 +315,7 @@ bars.CreateHarmonyPowerBar = function(self)
     end
 
     bar:SetScale(self.cfg.harmony.scale)
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.harmony.combat.enable then
         rCombatFrameFader(bar, self.cfg.harmony.combat.fadeIn, self.cfg.harmony.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
@@ -408,7 +408,7 @@ bars.CreateHolyPowerBar = function(self)
     end
 
     bar:SetScale(self.cfg.holypower.scale)
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.holypower.combat.enable then
         rCombatFrameFader(bar, self.cfg.holypower.combat.fadeIn, self.cfg.holypower.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
@@ -511,7 +511,7 @@ bars.CreateBurningEmberPowerBar = function(self)
     end
 
     bar:SetScale(self.cfg.burningembers.scale)
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.burningembers.combat.enable then
         rCombatFrameFader(bar, self.cfg.burningembers.combat.fadeIn, self.cfg.burningembers.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
@@ -604,7 +604,7 @@ bars.CreateSoulShardPowerBar = function(self)
     end
 
     bar:SetScale(self.cfg.soulshards.scale)
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.soulshards.combat.enable then
         rCombatFrameFader(bar, self.cfg.soulshards.combat.fadeIn, self.cfg.soulshards.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
@@ -651,12 +651,12 @@ bars.CreateDemonicFuryPowerBar = function(self)
     t:SetBlendMode("BLEND")
     sb.glow = t
 
-    local text = func.createFontString(border, cfg.font, 14, "THINOUTLINE")
+    local text = func.CreateFontString(border, cfg.font, 14, "THINOUTLINE")
     text:SetPoint("CENTER")
     text:SetTextColor(0.8,0.8,0.8)
     sb.value = text
 
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
 
     --combat fading
     if self.cfg.demonicfury.combat.enable then
@@ -751,7 +751,7 @@ bars.CreateRuneBar = function(self)
     end
 
     bar:SetScale(self.cfg.runes.scale)
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.runes.combat.enable then
         rCombatFrameFader(bar, self.cfg.runes.combat.fadeIn, self.cfg.runes.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
@@ -860,7 +860,7 @@ bars.CreateEclipseBar = function(self)
 
     bar.PostUpdateVisibility = bar.PostDirectionChange
 
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.eclipse.combat.enable then
         rCombatFrameFader(bar, self.cfg.eclipse.combat.fadeIn, self.cfg.eclipse.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
@@ -958,7 +958,7 @@ bars.CreateComboBar = function(self)
 
     end
 
-    func.applyDragFunctionality(bar)
+    func.ApplyDragFunctionality(bar)
     --combat fading
     if self.cfg.combobar.combat.enable then
         rCombatFrameFader(bar, self.cfg.combobar.combat.fadeIn, self.cfg.combobar.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut

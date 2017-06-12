@@ -81,7 +81,7 @@ The following settings are unique to icons:
 
 Here is an example of how to set oUF_AW up:
 
-  local createAuraWatch = function(self, unit)
+  local CreateAuraWatch = function(self, unit)
     local auras = {}
 
     -- A table of spellIDs to create icons for

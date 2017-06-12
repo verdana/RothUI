@@ -98,7 +98,7 @@ oUF.Tags.Methods["diablo:hpval"] = function(unit)
     elseif not UnitIsConnected(unit) then
         hpval = "Offline"
     else
-        hpval = func.numFormat(UnitHealth(unit) or 0).." / "..oUF.Tags.Methods["maxshp"](unit)
+        hpval = func.NumberFormat(UnitHealth(unit) or 0).." / "..oUF.Tags.Methods["maxshp"](unit)
     end
     return "|cff"..color..(hpval or "").."|r"
 end
@@ -108,7 +108,7 @@ oUF.Tags.Events["diablo:hpval"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
 
 --power value
 oUF.Tags.Methods["diablo:ppval"] = function(unit)
-    local ppval = func.numFormat(UnitPower(unit) or 0).." / "..oUF.Tags.Methods["maxspp"](unit)
+    local ppval = func.NumberFormat(UnitPower(unit) or 0).." / "..oUF.Tags.Methods["maxspp"](unit)
     return ppval or ""
 end
 oUF.Tags.Events["diablo:ppval"] = "UNIT_POWER UNIT_MAXPOWER"
@@ -125,7 +125,7 @@ oUF.Tags.Methods["diablo:misshp"] = function(unit)
     else
         local max, min = UnitHealthMax(unit), UnitHealth(unit)
         if max-min > 0 then
-            hpval = "-"..func.numFormat(max-min)
+            hpval = "-"..func.NumberFormat(max-min)
         end
     end
     return "|cff"..color..(hpval or "").."|r"
@@ -146,7 +146,7 @@ oUF.Tags.Methods["diablo:raidhp"] = function(unit, rolf)
     else
         local max, min = UnitHealthMax(unit), UnitHealth(unit)
         if max-min > 0 then
-            hpval = "-"..func.numFormat(max-min)
+            hpval = "-"..func.NumberFormat(max-min)
             --rewrite color to white
             color = "ffffff"
         else
@@ -239,7 +239,7 @@ oUF.Tags.Methods["botdefhp"] = function(unit)
         return "Offline"
     end
     local val = oUF.Tags.Methods["curhp"](unit)
-    val = func.numFormat(val)
+    val = func.NumberFormat(val)
     return val or ""
 end
 oUF.Tags.Events["botdefhp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
@@ -254,7 +254,7 @@ oUF.Tags.Methods["topdefpp"] = function(unit)
     local val
     if powertype ~= "MANA" then
         val = oUF.Tags.Methods["curpp"](unit)
-        val = func.numFormat(val)
+        val = func.NumberFormat(val)
     else
         val = oUF.Tags.Methods["perpp"](unit)
     end
@@ -274,7 +274,7 @@ oUF.Tags.Methods["botdefpp"] = function(unit)
         val = oUF.Tags.Methods["perpp"](unit)
     else
         val = oUF.Tags.Methods["curpp"](unit)
-        val = func.numFormat(val)
+        val = func.NumberFormat(val)
     end
     return val or ""
 end
@@ -285,7 +285,7 @@ oUF.Tags.Events["botdefpp"] = "UNIT_DISPLAYPOWER UNIT_POWER UNIT_MAXPOWER UNIT_C
 --curshp - curhp short
 oUF.Tags.Methods["curshp"] = function(unit)
     local val = oUF.Tags.Methods["curhp"](unit)
-    val = func.numFormat(val)
+    val = func.NumberFormat(val)
     return val or ""
 end
 oUF.Tags.Events["curshp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
@@ -295,7 +295,7 @@ oUF.Tags.Events["curshp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
 --maxshp - maxhp short
 oUF.Tags.Methods["maxshp"] = function(unit)
     local val = oUF.Tags.Methods["maxhp"](unit)
-    val = func.numFormat(val)
+    val = func.NumberFormat(val)
     return val or ""
 end
 oUF.Tags.Events["maxshp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
@@ -317,7 +317,7 @@ oUF.Tags.Events["cmaxhp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
 oUF.Tags.Methods["cmaxshp"] = function(unit)
     local cur = oUF.Tags.Methods["curhp"](unit)
     local max = oUF.Tags.Methods["maxhp"](unit)
-    local val = func.numFormat(cur).."/"..func.numFormat(max)
+    local val = func.NumberFormat(cur).."/"..func.NumberFormat(max)
     return val or ""
 end
 oUF.Tags.Events["cmaxshp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
@@ -327,7 +327,7 @@ oUF.Tags.Events["cmaxshp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
 --curspp - curpp short
 oUF.Tags.Methods["curspp"] = function(unit)
     local val = oUF.Tags.Methods["curpp"](unit)
-    val = func.numFormat(val)
+    val = func.NumberFormat(val)
     return val or ""
 end
 oUF.Tags.Events["curspp"] = "UNIT_DISPLAYPOWER UNIT_POWER UNIT_MAXPOWER UNIT_CONNECTION"
@@ -337,7 +337,7 @@ oUF.Tags.Events["curspp"] = "UNIT_DISPLAYPOWER UNIT_POWER UNIT_MAXPOWER UNIT_CON
 --maxspp - maxpp short
 oUF.Tags.Methods["maxspp"] = function(unit)
     local val = oUF.Tags.Methods["maxpp"](unit)
-    val = func.numFormat(val)
+    val = func.NumberFormat(val)
     return val or ""
 end
 oUF.Tags.Events["maxspp"] = "UNIT_DISPLAYPOWER UNIT_POWER UNIT_MAXPOWER UNIT_CONNECTION"
@@ -359,7 +359,7 @@ oUF.Tags.Events["cmaxpp"] = "UNIT_DISPLAYPOWER UNIT_POWER UNIT_MAXPOWER UNIT_CON
 oUF.Tags.Methods["cmaxspp"] = function(unit)
     local cur = oUF.Tags.Methods["curpp"](unit)
     local max = oUF.Tags.Methods["maxpp"](unit)
-    local val = func.numFormat(cur).."/"..func.numFormat(max)
+    local val = func.NumberFormat(cur).."/"..func.NumberFormat(max)
     return val or ""
 end
 oUF.Tags.Events["cmaxspp"] = "UNIT_DISPLAYPOWER UNIT_POWER UNIT_MAXPOWER UNIT_CONNECTION"

@@ -93,16 +93,16 @@ end
 
 --create health power strings
 local createHealthPowerStrings = function(self)
-    local name = func.createFontString(self, cfg.font, 14, "THINOUTLINE")
+    local name = func.CreateFontString(self, cfg.font, 14, "THINOUTLINE")
     name:SetPoint("BOTTOM", self, "TOP", 0, -14)
     name:SetPoint("LEFT", self.Health, 0, 0)
     name:SetPoint("RIGHT", self.Health, 0, 0)
     self.Name = name
 
-    local hpval = func.createFontString(self.Health, cfg.font, 11, "THINOUTLINE")
+    local hpval = func.CreateFontString(self.Health, cfg.font, 11, "THINOUTLINE")
     hpval:SetPoint("RIGHT", -2,0)
 
-    local ppval = func.createFontString(self.Health, cfg.font, 10, "THINOUTLINE")
+    local ppval = func.CreateFontString(self.Health, cfg.font, 10, "THINOUTLINE")
     ppval:SetPoint("TOP",self.Health,"BOTTOM", 0,0)
     ppval:SetVertexColor(0.6,0.6,0.6,1)
 
@@ -141,11 +141,11 @@ local function createStyle(self)
     createHealthPowerStrings(self)
 
     --health power update
-    self.Health.PostUpdate = func.updateHealth
-    self.Power.PostUpdate = func.updatePower
+    self.Health.PostUpdate = func.UpdateHealth
+    self.Power.PostUpdate = func.UpdatePower
 
     --icons
-    self.RaidTargetIndicator = func.createIcon(self,"BACKGROUND",16,self.Name,"BOTTOM","TOP",0,0,-1)
+    self.RaidTargetIndicator = func.CreateIcon(self,"BACKGROUND",16,self.Name,"BOTTOM","TOP",0,0,-1)
 
     --add self to unit container (maybe access to that unit is needed in another style)
     unit.boss[bossid] = self
@@ -171,7 +171,7 @@ if cfg.units.boss.show then
         end
         --this is bad. generate a drag frame an make that movable. anchor the boss frames to the drag frame.
         --table.insert(oUF_Diablo_Units,name) --add frames to the slash command function
-        --func.applyDragFunctionality(unit)
+        --func.ApplyDragFunctionality(unit)
         boss[i] = unit
     end
 end
