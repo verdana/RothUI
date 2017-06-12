@@ -70,25 +70,25 @@ bars.createRepBar = function(self)
 
     local w, h = 360, 5
 
-    local f = CreateFrame("StatusBar","oUF_DiabloRepBar",self)
-    f:SetFrameStrata("LOW")
-    f:SetFrameLevel(1)
-    f:SetSize(w,h)
-    f:SetPoint(cfg.pos.a1, cfg.pos.af, cfg.pos.a2, cfg.pos.x, cfg.pos.y)
-    f:SetScale(cfg.scale)
-    f:SetStatusBarTexture(cfg.texture)
-    f:SetStatusBarColor(0,0.7,0)
+    local ReputationBar = CreateFrame("StatusBar","oUF_DiabloRepBar",self)
+    ReputationBar:SetFrameStrata("LOW")
+    ReputationBar:SetFrameLevel(1)
+    ReputationBar:SetSize(w, h)
+    ReputationBar:SetPoint(cfg.pos.a1, cfg.pos.af, cfg.pos.a2, cfg.pos.x, cfg.pos.y)
+    ReputationBar:SetScale(cfg.scale)
+    ReputationBar:SetStatusBarTexture(cfg.texture)
+    ReputationBar:SetStatusBarColor(0,0.7,0)
 
-    func.applyDragFunctionality(f)
+    func.applyDragFunctionality(ReputationBar)
 
-    local t = f:CreateTexture(nil,"BACKGROUND",nil,-8)
-    t:SetAllPoints(f)
-    t:SetTexture(cfg.texture)
-    t:SetVertexColor(0,0.7,0)
-    t:SetAlpha(0.3)
-    f.bg = t
+    local ReputationBack = ReputationBar:CreateTexture(nil,"BACKGROUND",nil,-8)
+    ReputationBack:SetAllPoints(ReputationBar)
+    ReputationBack:SetTexture(cfg.texture)
+    ReputationBack:SetVertexColor(0,0.7,0)
+    ReputationBack:SetAlpha(0.3)
+    ReputationBar.bg = ReputationBack
 
-    f:SetScript("OnEnter", function(s)
+    ReputationBar:SetScript("OnEnter", function(s)
         name, standing, minrep, maxrep, value = GetWatchedFactionInfo()
         GameTooltip:SetOwner(s, "ANCHOR_TOP")
         GameTooltip:AddLine("Reputation", 0, 1, 0.5, 1, 1, 1)
@@ -99,9 +99,39 @@ bars.createRepBar = function(self)
         end
         GameTooltip:Show()
     end)
-    f:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
+    ReputationBar:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
+    self.Reputation = ReputationBar
+end
 
-    self.Reputation = f
+-- Artifact Power Bar
+bars.CreateArtifactPowerBar = function(self)
+    local cfg = self.cfg.artifact
+    if not cfg.show then return end
+
+    -- disable the expbar && repbar
+    self.cfg.expbar.show = false
+    self.cfg.repbar.show = false
+
+    local w, h = 360, 5
+
+    local ArtifactPowerBar = CreateFrame("StatusBar", "oUF_DiabloArtifactPowerBar", self)
+    ArtifactPowerBar:SetFrameStrata("LOW")
+    ArtifactPowerBar:SetFrameLevel(3)
+    ArtifactPowerBar:SetSize(w, h)
+    ArtifactPowerBar:SetPoint(cfg.pos.a1, cfg.pos.af, cfg.pos.a2, cfg.pos.x, cfg.pos.y)
+    ArtifactPowerBar:SetScale(cfg.scale)
+    ArtifactPowerBar:SetStatusBarTexture(cfg.texture)
+    ArtifactPowerBar:SetStatusBarColor(0.9, 0.8, 0.6)
+    ArtifactPowerBar:EnableMouse(true)
+
+    local ArtifactBack = ArtifactPowerBar:CreateTexture(nil,"BACKGROUND",nil,-8)
+    ArtifactBack:SetAllPoints(ArtifactPowerBar)
+    ArtifactBack:SetTexture(cfg.texture)
+    ArtifactBack:SetVertexColor(0,0.7,0)
+    ArtifactBack:SetAlpha(0.3)
+    ArtifactPowerBar.bg = ArtifactBack
+
+    self.ArtifactPower = ArtifactPowerBar
 end
 
 --create mage arcane charges power bar

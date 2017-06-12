@@ -119,7 +119,7 @@ local createBottomLine = function(self)
     f:SetSize(500,112)
     f:SetPoint(cfg.pos.a1, cfg.pos.af, cfg.pos.a2, cfg.pos.x, cfg.pos.y)
     f:SetScale(cfg.scale)
-    func.applyDragFunctionality(f,"bottomline")
+    func.applyDragFunctionality(f, "bottomline")
     local t = f:CreateTexture(nil,"BACKGROUND",nil,3)
     t:SetAllPoints(f)
     t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\d3_bottom")
@@ -462,13 +462,16 @@ local createStyle = function(self)
     createAngelFrame(self)
     createDemonFrame(self)
 
-    --experience bar
+    -- Artifact Power Bar
+    bars.CreateArtifactPowerBar(self)
+
+    -- Experience Bar
     bars.createExpBar(self)
 
-    --reputation bar
+    -- Reputation Bar
     bars.createRepBar(self)
 
-    --bottomline
+    -- Bottomline
     createBottomLine(self)
 
     --icons

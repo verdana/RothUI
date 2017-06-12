@@ -177,6 +177,12 @@ cfg.units = {
             texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
             scale = 1,
         },
+        artifact = {--artifact power
+            show = true,
+            pos = {a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 10},
+            texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
+            scale = 1,
+        },
         art = {
             actionbarbackground = {
                 show = true,

@@ -12,6 +12,7 @@ embeds\oUF\oUF.xml
 
 ## modules\oUF_AuraWatch.lua
 modules\oUF_ArcaneCharges.lua
+modules\oUF_ArtifactPower.lua
 modules\oUF_BurningEmbers.lua
 modules\oUF_ComboPoints.lua
 modules\oUF_DebuffHighlight.lua
