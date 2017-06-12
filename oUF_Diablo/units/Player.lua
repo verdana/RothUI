@@ -466,10 +466,10 @@ local createStyle = function(self)
     bars.CreateArtifactPowerBar(self)
 
     -- Experience Bar
-    bars.createExpBar(self)
+    bars.CreateExpBar(self)
 
     -- Reputation Bar
-    bars.createRepBar(self)
+    bars.CreateRepBar(self)
 
     -- Bottomline
     createBottomLine(self)
@@ -500,33 +500,33 @@ local createStyle = function(self)
 
     --mage bars
     if cfg.playerclass == "MAGE" and self.cfg.arcanecharges.show then
-        bars.createArcaneChargesPowerBar(self)
+        bars.CreateArcaneChargesPowerBar(self)
     end
 
     --warlock bars
     if cfg.playerclass == "WARLOCK" and self.cfg.soulshards.show then
-        bars.createSoulShardPowerBar(self)
+        bars.CreateSoulShardPowerBar(self)
     end
 
     --holypower
     if cfg.playerclass == "PALADIN" and self.cfg.holypower.show then
-        bars.createHolyPowerBar(self)
+        bars.CreateHolyPowerBar(self)
     end
 
     --harmony
     if cfg.playerclass == "MONK" and self.cfg.harmony.show then
-        bars.createHarmonyPowerBar(self)
+        bars.CreateHarmonyPowerBar(self)
     end
 
     --runes
     if cfg.playerclass == "DEATHKNIGHT" and self.cfg.runes.show then
         --position deathknight runes
-        bars.createRuneBar(self)
+        bars.CreateRuneBar(self)
     end
 
     --combobar
     if self.cfg.combobar.show then
-        bars.createComboBar(self)
+        bars.CreateComboBar(self)
     end
 
     --create portrait

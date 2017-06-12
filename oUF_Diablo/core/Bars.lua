@@ -15,7 +15,7 @@ local cfg = ns.cfg
 ---------------------------------------------
 
 --create the exp bar
-bars.createExpBar = function(self)
+bars.CreateExpBar = function(self)
     local cfg = self.cfg.expbar
     if not cfg.show then return end
 
@@ -64,7 +64,7 @@ bars.createExpBar = function(self)
 end
 
 --create the reputation bar
-bars.createRepBar = function(self)
+bars.CreateRepBar = function(self)
     local cfg = self.cfg.repbar
     if not cfg.show then return end
 
@@ -135,7 +135,7 @@ bars.CreateArtifactPowerBar = function(self)
 end
 
 --create mage arcane charges power bar
-bars.createArcaneChargesPowerBar = function(self)
+bars.CreateArcaneChargesPowerBar = function(self)
     self.ArcaneCharges = {}
 
     local t
@@ -232,7 +232,7 @@ bars.createArcaneChargesPowerBar = function(self)
 end
 
 --create harmony power bar
-bars.createHarmonyPowerBar = function(self)
+bars.CreateHarmonyPowerBar = function(self)
     self.Harmony = {}
 
     local t
@@ -325,7 +325,7 @@ bars.createHarmonyPowerBar = function(self)
 end
 
 --create holy power bar
-bars.createHolyPowerBar = function(self)
+bars.CreateHolyPowerBar = function(self)
     self.HolyPower = {}
 
     local t
@@ -418,7 +418,7 @@ bars.createHolyPowerBar = function(self)
 end
 
 --create burningember power bar
-bars.createBurningEmberPowerBar = function(self)
+bars.CreateBurningEmberPowerBar = function(self)
     self.BurningEmbers = {}
 
     local t
@@ -520,7 +520,7 @@ bars.createBurningEmberPowerBar = function(self)
 end
 
 --create soulshard power bar
-bars.createSoulShardPowerBar = function(self)
+bars.CreateSoulShardPowerBar = function(self)
     self.SoulShards = {}
 
     local t
@@ -614,7 +614,7 @@ bars.createSoulShardPowerBar = function(self)
 end
 
 --create warlock bars
-bars.createDemonicFuryPowerBar = function(self)
+bars.CreateDemonicFuryPowerBar = function(self)
     self.DemonicFury = {}
     local bar = CreateFrame("Frame","oUF_DemonicFuryPower",self)
     bar:SetPoint(self.cfg.demonicfury.pos.a1,self.cfg.demonicfury.pos.af,self.cfg.demonicfury.pos.a2,self.cfg.demonicfury.pos.x,self.cfg.demonicfury.pos.y)
@@ -667,7 +667,7 @@ bars.createDemonicFuryPowerBar = function(self)
 end
 
 --create rune orbs bar
-bars.createRuneBar = function(self)
+bars.CreateRuneBar = function(self)
     self.RuneOrbs = {}
 
     local t
@@ -760,7 +760,7 @@ bars.createRuneBar = function(self)
 end
 
 --create eclipse power bar
-bars.createEclipseBar = function(self)
+bars.CreateEclipseBar = function(self)
     local bar = CreateFrame("Frame","oUF_DiabloEclipsePower",self)
     bar:SetPoint(self.cfg.eclipse.pos.a1,self.cfg.eclipse.pos.af,self.cfg.eclipse.pos.a2,self.cfg.eclipse.pos.x,self.cfg.eclipse.pos.y)
     bar:SetSize(256,32)
@@ -872,7 +872,7 @@ bars.createEclipseBar = function(self)
 end
 
 --create combo
-bars.createComboBar = function(self)
+bars.CreateComboBar = function(self)
     self.ComboPoints = {}
 
     local t
