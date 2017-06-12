@@ -51,7 +51,6 @@ local bar = self.ArcaneChargesPowerBar
     end
 end
 
-
 local Visibility = function(self, event, unit)
     local element = self.ArcaneCharges
     local bar = self.ArcaneChargesPowerBar
@@ -68,21 +67,17 @@ local Visibility = function(self, event, unit)
     end
 end
 
-
 local Path = function(self, ...)
     return (self.ArcaneCharges.Override or Update)(self, ...)
 end
-
 
 local ForceUpdate = function(element)
     return Path(element.__owner, "ForceUpdate", element.__owner.unit, "ARCANE_CHARGES")
 end
 
-
 local function Enable(self, unit)
     local element = self.ArcaneCharges
     if (element and unit == "player") then
-    print("Enable arcane charges ");
 
         element.__owner = self
         element.ForceUpdate = ForceUpdate
@@ -117,3 +112,4 @@ local function Disable(self)
 end
 
 oUF:AddElement("ArcaneCharges", Path, Enable, Disable)
+
