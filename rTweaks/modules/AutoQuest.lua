@@ -150,7 +150,6 @@ function AutoQuest:GOSSIP_SHOW(event)
 
     for i = 1, #availableQuests, 7 do
         local title = availableQuests[i+0]
-        print(title)
         if IsMarkedQuestByTitle(title) then
             SelectGossipAvailableQuest(i)
             return
