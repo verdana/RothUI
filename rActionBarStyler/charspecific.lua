@@ -17,3 +17,4 @@ local realm = GetRealmName()
 
 cfg.bars.bar4.mouseover.enable = false
 cfg.bars.bar5.mouseover.enable = false
+
