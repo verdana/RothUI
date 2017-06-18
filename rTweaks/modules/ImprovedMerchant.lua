@@ -22,6 +22,10 @@ local CustomItems = {
     [110294] = true, -- 黑水鞭尾鱼鱼饵
 }
 
+local YFC = YELLOW_FONT_COLOR
+local GFC = GREEN_FONT_COLOR
+local RFC = RED_FONT_COLOR
+
 -- TODO 保留一些超级鱼虫
 local f = CreateFrame("Frame")
 f:SetScript("OnEvent", function()
@@ -39,7 +43,7 @@ f:SetScript("OnEvent", function()
                         -- 计算收益
                         local sum = price * count
                         count = count + sum
-                        print("卖出物品：" .. link)
+                        DEFAULT_CHAT_FRAME:AddMessage("卖出物品：" .. link, GFC.r, GFC.g, GFC.b)
                     end
                 end
             end
@@ -47,7 +51,7 @@ f:SetScript("OnEvent", function()
     end
     if count > 0 then
         local g, s, c = math.floor(count/10000) or 0, math.floor((count%10000)/100) or 0, count%100
-        DEFAULT_CHAT_FRAME:AddMessage("Your vendor trash has been sold and you earned |cffffffff"..g.."|cffffd700g |cffffffff"..s.."|cffc7c7cfs|cffffffff "..c.."|cffeda55fc|r.",255,255,0)
+        DEFAULT_CHAT_FRAME:AddMessage("Your vendor trash has been sold and you earned |cffffffff"..g.."|cffffd700g |cffffffff"..s.."|cffc7c7cfs|cffffffff "..c.."|cffeda55fc|r.", YFC.r, YFC.g, YFC.b)
     end
 
     hooksecurefunc("MerchantItemButton_OnModifiedClick", function(self, button)
@@ -64,11 +68,12 @@ f:SetScript("OnEvent", function()
                 local c = cost%100
                 local s = math.floor((cost%10000)/100)
                 local g = math.floor(cost/10000)
-                DEFAULT_CHAT_FRAME:AddMessage("Your items have been repaired for |cffffffff"..g.."|cffffd700g |cffffffff"..s.."|cffc7c7cfs|cffffffff "..c.."|cffeda55fc|r.",255,255,0)
+                DEFAULT_CHAT_FRAME:AddMessage("Your items have been repaired for |cffffffff"..g.."|cffffd700g |cffffffff"..s.."|cffc7c7cfs|cffffffff "..c.."|cffeda55fc|r.", YFC.r, YFC.g, YFC.b)
             else
-                DEFAULT_CHAT_FRAME:AddMessage("You don't have enough money for repair!",255,0,0)
+                DEFAULT_CHAT_FRAME:AddMessage("You don't have enough money for repair!", RFC.r, RFC.g, RFC.b)
             end
         end
     end
 end)
 f:RegisterEvent("MERCHANT_SHOW")
+
