@@ -2,28 +2,9 @@
 -- 自定义需要卖出的非灰色物品
 local CustomItems = {
     [33820]  = true, -- 饱经风霜的渔帽
-    [45991]  = true, -- 骨质鱼竿
-    [45992]  = true, -- 珠宝鱼竿
-    [67404]  = true, -- 玻璃浮漂
-    [109222] = true, -- 德拉诺法力药水
-    [109226] = true, -- 德拉诺活力药水
-
-    [118380] = true, -- 超级捕鱼帽
-    [118381] = true, -- 日抛型鱼竿
-    [118391] = true, -- 超级鱼虫
-    [118393] = true, -- 带触须的帽子
-
-    [110274] = true, -- 无颚潜鱼鱼饵
-    [110289] = true, -- 塘鲈鱼饵
-    [110290] = true, -- 盲眼湖鲟鱼饵
-    [110291] = true, -- 熔火鱿鱼鱼饵
-    [110292] = true, -- 海蝎子鱼饵
-    [110293] = true, -- 深渊大嘴鳗鱼饵
-    [110294] = true, -- 黑水鞭尾鱼鱼饵
 }
 
 local YFC = YELLOW_FONT_COLOR
-local GFC = GREEN_FONT_COLOR
 local RFC = RED_FONT_COLOR
 
 -- TODO 保留一些超级鱼虫
@@ -43,7 +24,7 @@ f:SetScript("OnEvent", function()
                         -- 计算收益
                         local sum = price * count
                         count = count + sum
-                        DEFAULT_CHAT_FRAME:AddMessage("卖出物品：" .. link, GFC.r, GFC.g, GFC.b)
+                        DEFAULT_CHAT_FRAME:AddMessage("你卖出了：" .. link, 0, 2/3, 0)
                     end
                 end
             end
