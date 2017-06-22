@@ -72,3 +72,10 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", ChatFilter)
 ChatFrame_AddMessageEventFilter("CHAT_MSG_SAY",     ChatFilter)
 ChatFrame_AddMessageEventFilter("CHAT_MSG_YELL",    ChatFilter)
 ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER", ChatFilter)
+
+-- hooksecurefunc(ChatFrame1, "AddMessage", function(self, message, r, g, b, ...)
+--     if (r ~= nil and g ~= nil and b ~= nil) then
+--         print("r = " .. r, "g = " .. g, "b = " .. b)
+--     end
+-- end)
+
