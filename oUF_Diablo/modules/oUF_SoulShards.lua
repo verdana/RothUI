@@ -58,6 +58,7 @@ local Visibility = function(self, event, unit)
     local element = self.SoulShards
     local bar = self.SoulShardPowerBar
     if UnitHasVehicleUI("player")
+        or UnitOnTaxi("player")
         or ((HasVehicleActionBar() and UnitVehicleSkin("player") and UnitVehicleSkin("player") ~= "")
         or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
     then

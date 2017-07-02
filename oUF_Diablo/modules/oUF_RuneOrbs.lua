@@ -60,6 +60,7 @@ local Visibility = function(self, event, unit)
     local element = self.RuneOrbs
     local bar = self.RuneBar
     if UnitHasVehicleUI("player")
+        or UnitOnTaxi("player")
         or ((HasVehicleActionBar() and UnitVehicleSkin("player") and UnitVehicleSkin("player") ~= "")
         or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
     then

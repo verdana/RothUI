@@ -72,6 +72,7 @@ local Visibility = function(self, event, unit)
   local element = self.BurningEmbers
   local bar = self.BurningEmberPowerBar
   if UnitHasVehicleUI("player")
+    or UnitOnTaxi("player")
     or ((HasVehicleActionBar() and UnitVehicleSkin("player") and UnitVehicleSkin("player") ~= "")
     or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
   then
