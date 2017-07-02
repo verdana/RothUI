@@ -52,37 +52,37 @@ end
 -- 优化的随机坐骑宏
 SLASH_MOUNT1 = "/mount"
 SlashCmdList["MOUNT"] = function(msg)
-        -- 如果在飞行中，防止手贱误操作摔死
-        if IsFlying() then return end
+    -- 如果在飞行中，防止手贱误操作摔死
+    if IsFlying() then return end
 
-        -- 在德拉诺的纳格兰，如果可以优先使用霜狼战狼/塔拉塔布羊
-        -- 可以在战斗中使用的
-        if not IsFlyableArea() and GetCurrentMapContinent() == 7 and GetZoneText() == "纳格兰" then
-            -- 检查当前要塞技能 ID 是否为战狼
-            local spellID = DraenorZoneAbilityFrame.SpellButton.currentSpellID or 0
-            -- 部落 / 联盟
-            if spellID == 164222 or spellID == 165803 then
-                CastSpellByName("要塞技能")
-                return
-            end
-        end
-
-        -- 其它情况需要检测是否在战斗中
-        if InCombatLockdown() then return end
-
-        -- 万圣节使用魔法扫帚
-        if GetItemCount(37011) >= 1 then
-            UseItemByName(37011)
+    -- 在德拉诺的纳格兰，如果可以优先使用霜狼战狼/塔拉塔布羊
+    -- 可以在战斗中使用的
+    if not IsFlyableArea() and GetCurrentMapContinent() == 7 and GetZoneText() == "纳格兰" then
+        -- 检查当前要塞技能 ID 是否为战狼
+        local spellID = DraenorZoneAbilityFrame.SpellButton.currentSpellID or 0
+        -- 部落 / 联盟
+        if spellID == 164222 or spellID == 165803 then
+            CastSpellByName("要塞技能")
             return
         end
+    end
 
-        -- 这里是瓦丝琪尔
-        local map = GetMapInfo()
-        if map and strsub(map, 0, 7) == "Vashjir" and IsUsableSpell(75207) then
-            CastSpellByName(GetSpellInfo(75207))
-        else
-            C_MountJournal.SummonByID(0)
-        end
+    -- 其它情况需要检测是否在战斗中
+    if InCombatLockdown() then return end
+
+    -- 万圣节使用魔法扫帚
+    if GetItemCount(37011) >= 1 then
+        UseItemByName(37011)
+        return
+    end
+
+    -- 这里是瓦丝琪尔
+    local map = GetMapInfo()
+    if map and strsub(map, 0, 7) == "Vashjir" and IsUsableSpell(75207) then
+        CastSpellByName(GetSpellInfo(75207))
+    else
+        C_MountJournal.SummonByID(0)
+    end
 end
 
 -- 导出所有宠物信息
@@ -143,32 +143,32 @@ end
 -- http://bbs.nga.cn/read.php?&tid=9622396
 do
     local UIConfig = function()
-            -- 显示脚本错误 --
-            SetCVar("scriptErrors", 1)
+        -- 显示脚本错误 --
+        SetCVar("scriptErrors", 1)
 
-            -- 截图质量
-            SetCVar("screenshotQuality", 10)
-            SetCVar("screenshotFormat", "jpg")
+        -- 截图质量
+        SetCVar("screenshotQuality", 10)
+        SetCVar("screenshotFormat", "jpg")
 
-            -- 自动追踪任务
-            SetCVar("autoQuestProgress", 1)
+        -- 自动追踪任务
+        SetCVar("autoQuestProgress", 1)
 
-            -- 背包与物品拾取
-            SetCVar("autoLootDefault", 1)
-            SetCVar("lootUnderMouse", 1)
+        -- 背包与物品拾取
+        SetCVar("autoLootDefault", 1)
+        SetCVar("lootUnderMouse", 1)
 
-            -- 移动时地图半透明
-            SetCVar("mapFade", 0)
+        -- 移动时地图半透明
+        SetCVar("mapFade", 0)
 
-            -- 對目標傷害，0關；如果要關閉傷害數字，使用這項
-            SetCVar("floatingCombatTextCombatDamage", 1)
-            -- 對目標治療，0關；如果要關閉治療數字，使用這項
-            SetCVar("floatingCombatTextCombatHealing", 1)
+        -- 對目標傷害，0關；如果要關閉傷害數字，使用這項
+        SetCVar("floatingCombatTextCombatDamage", 1)
+        -- 對目標治療，0關；如果要關閉治療數字，使用這項
+        SetCVar("floatingCombatTextCombatHealing", 1)
 
-            -- 新的浮動戰鬥文字運動方式，1往上 2往下 3弧形
-            SetCVar("floatingCombatTextFloatMode", 1)
-            -- 舊的動戰鬥文字運動方式，0開；使用這項，浮動戰鬥文字就會垂直往上
-            SetCVar("floatingCombatTextCombatDamageDirectionalScale", 0)
+        -- 新的浮動戰鬥文字運動方式，1往上 2往下 3弧形
+        SetCVar("floatingCombatTextFloatMode", 1)
+        -- 舊的動戰鬥文字運動方式，0開；使用這項，浮動戰鬥文字就會垂直往上
+        SetCVar("floatingCombatTextCombatDamageDirectionalScale", 0)
     end
 
     -- 确认框
