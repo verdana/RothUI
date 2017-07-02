@@ -306,9 +306,9 @@ local function Enable(self, unit)
 		for i = 1, #element do
 			local bar = element[i]
 			if(bar:IsObjectType('StatusBar')) then
-				if(not bar:GetStatusBarTexture()) then
-					bar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
-				end
+				-- if(not bar:GetStatusBarTexture()) then
+				-- 	bar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
+				-- end
 
 				bar:SetMinMaxValues(0, 1)
 			end

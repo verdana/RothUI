@@ -966,3 +966,169 @@ bars.CreateComboBar = function(self)
     self.ComboBar = bar
 end
 
+local TEXTURE = [[Interface\ChatFrame\ChatFrameBackground]]
+local BACKDROP = {
+    bgFile = TEXTURE,
+    insets = {top = -1, bottom = -1, left = -1, right = -1}
+}
+
+local function PostUpdateClassPower(element, cur, max, diff, powerType)
+    if(diff) then
+        for index = 1, max do
+            local Bar = element[index]
+            -- print(Bar:IsShown())
+            -- if(max == 3) then
+            --     Bar:SetWidth(74)
+            -- elseif(max == 4) then
+            --     Bar:SetWidth(index > 2 and 55 or 54)
+            -- elseif(max == 5 or max == 10) then
+            --     Bar:SetWidth((index == 1 or index == 6) and 42 or 43)
+            -- elseif(max == 6) then
+            --     Bar:SetWidth(35)
+            -- end
+
+            if(max == 10) then
+                -- Rogue anticipation talent, align >5 on top of the first 5
+                if(index == 6) then
+                    Bar:ClearAllPoints()
+                    Bar:SetPoint('LEFT', element[index - 5])
+                end
+            else
+                if(index > 1) then
+                    Bar:ClearAllPoints()
+                    Bar:SetPoint('LEFT', element[index - 1], 'RIGHT', 0, 0)
+                end
+            end
+        end
+    end
+end
+
+local function UpdateClassPowerColor(element)
+    -- local r, g, b = 1, 1, 2/5
+    -- if(not UnitHasVehicleUI('player')) then
+    --     if(playerClass == 'MONK') then
+    --         r, g, b = 0, 4/5, 3/5
+    --     elseif(playerClass == 'WARLOCK') then
+    --         r, g, b = 2/3, 1/3, 2/3
+    --     elseif(playerClass == 'PALADIN') then
+    --         r, g, b = 1, 1, 2/5
+    --     elseif(playerClass == 'MAGE') then
+    --         r, g, b = 5/6, 1/2, 5/6
+    --     end
+    -- end
+
+    -- for index = 1, #element do
+    --     local Bar = element[index]
+    --     if(playerClass == 'ROGUE' and element.__max == 10 and index > 5) then
+    --         r, g, b = 1, 0, 0
+    --     end
+
+    --     -- Bar:SetStatusBarColor(r, g, b)
+    --     Bar.bg:SetColorTexture(r * 1/3, g * 1/3, b * 1/3)
+    -- end
+end
+
+--create classpower
+bars.CreateClassPowerBar = function(self)
+    local ClassPowerBar = {}
+    ClassPowerBar.maxOrbs = 5
+    local w = 64*(ClassPowerBar.maxOrbs+2) --create the bar for
+    local h = 64
+
+    --bar:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    -- ClassPowerBar:SetPoint(
+    --     self.cfg.classpower.pos.a1,
+    --     self.cfg.classpower.pos.af,
+    --     self.cfg.classpower.pos.a2,
+    --     self.cfg.classpower.pos.x,
+    --     self.cfg.classpower.pos.y)
+
+    -- ClassPowerBar:SetWidth(w)
+    -- ClassPowerBar:SetHeight(h)
+    -- ClassPowerBar:Hide() --hide bar (it will become available if the spec matches)
+
+    --left edge
+    -- local t
+    -- t = ClassPowerBar:CreateTexture(nil,"BACKGROUND",nil,-8)
+    -- t:SetSize(64,64)
+    -- t:SetPoint("LEFT",0,0)
+    -- t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_left")
+    -- ClassPowerBar.leftEdge = t
+
+    -- --right edge
+    -- t = ClassPowerBar:CreateTexture(nil,"BACKGROUND",nil,-8)
+    -- t:SetSize(64,64)
+    -- t:SetPoint("RIGHT",0,0)
+    -- t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_right")
+    -- ClassPowerBar.rightEdge = t
+
+    ClassPowerBar.UpdateColor = UpdateClassPowerColor
+    ClassPowerBar.PostUpdate  = PostUpdateClassPower
+
+    -- print(ClassPowerBar._max)
+
+    local orbSizeMultiplier = 0.4
+
+    for index = 1, 11 do -- have to create an extra to force __max to be different from UnitPowerMax
+        local Bar = CreateFrame('StatusBar', nil, self)
+        Bar:SetSize(32, 32)
+        -- Bar:SetPoint("LEFT", index * 64, 0)
+        Bar:SetStatusBarTexture(nil)
+        -- Bar:SetStatusBarColor(
+        --     -- self.cfg.soulshards.color.r,
+        --     -- self.cfg.soulshards.color.g,
+        --     -- self.cfg.soulshards.color.b
+        -- )
+
+        if(index > 1) then
+            Bar:SetPoint('LEFT', ClassPowerBar[index - 1], 'RIGHT', 0, 0)
+        else
+            Bar:SetPoint('TOPLEFT', oUF_DiabloSoulShardPower, 'BOTTOMLEFT', 0, 0)
+        end
+
+        --bar background
+        Bar.barBg = Bar:CreateTexture(nil,"BACKGROUND",nil,-8)
+        Bar.barBg:SetSize(32,32)
+        Bar.barBg:SetPoint("CENTER")
+        Bar.barBg:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_bar_bg")
+
+        --orb background
+        Bar.bg = Bar:CreateTexture(nil,"BACKGROUND",nil,-7)
+        Bar.bg:SetSize(128*orbSizeMultiplier,128*orbSizeMultiplier)
+        Bar.bg:SetPoint("CENTER")
+        Bar.bg:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_gem_bg")
+
+        --orb filling
+        Bar.fill = Bar:CreateTexture(nil,"BACKGROUND",nil,-6)
+        Bar.fill:SetSize(128*orbSizeMultiplier,128*orbSizeMultiplier)
+        Bar.fill:SetPoint("CENTER")
+        Bar.fill:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_gem_fill1")
+        Bar.fill:SetVertexColor(self.cfg.soulshards.color.r,self.cfg.soulshards.color.g,self.cfg.soulshards.color.b)
+        -- Bar.fill:SetBlendMode("ADD")
+
+        --orb border
+        Bar.border = Bar:CreateTexture(nil,"BACKGROUND",nil,-5)
+        Bar.border:SetSize(128*orbSizeMultiplier,128*orbSizeMultiplier)
+        Bar.border:SetPoint("CENTER")
+        Bar.border:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_gem_border")
+
+        --orb glow
+        Bar.glow = Bar:CreateTexture(nil,"BACKGROUND",nil,-4)
+        Bar.glow:SetSize(128*orbSizeMultiplier,128*orbSizeMultiplier)
+        Bar.glow:SetPoint("CENTER")
+        Bar.glow:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_gem_glow")
+        Bar.glow:SetVertexColor(self.cfg.soulshards.color.r,self.cfg.soulshards.color.g,self.cfg.soulshards.color.b)
+        Bar.glow:SetBlendMode("BLEND")
+
+        -- --orb highlight
+        Bar.highlight = Bar:CreateTexture(nil,"BACKGROUND",nil,-3)
+        Bar.highlight:SetSize(128*orbSizeMultiplier,128*orbSizeMultiplier)
+        Bar.highlight:SetPoint("CENTER")
+        Bar.highlight:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\combo_gem_highlight")
+
+        ClassPowerBar[index] = Bar
+    end
+
+    self.ClassPower = ClassPowerBar
+end
+

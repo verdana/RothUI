@@ -64,7 +64,7 @@ cfg.units = {
         icons = {
             pvp = {
                 show = true,
-                pos = {a1 = "CENTER", a2 = "CENTER", x = -120, y = 30}, --position in relation to self object
+                pos = {a1 = "CENTER", a2 = "CENTER", x = -135, y = 30}, --position in relation to self object
             },
             combat = {
                 show = true,
@@ -143,6 +143,17 @@ cfg.units = {
                 fadeOut = {time = 0.3, alpha = 0.2},
             },
         },
+        classpower = {
+            show = false,
+            scale = 0.40,
+            color = {r = 0.9, g = 0.59, b = 0, },
+            pos = {a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 750},
+            combat = {--fade the bar in/out in combat/out of combat
+                enable = true,
+                fadeIn = {time = 0.4, alpha = 1},
+                fadeOut = {time = 0.3, alpha = 0.2},
+            },
+        },
         combobar = {
             show = true,
             scale = 0.40,
@@ -151,7 +162,7 @@ cfg.units = {
             combat = {--fade the bar in/out in combat/out of combat
                 enable = true,
                 fadeIn = {time = 0.4, alpha = 1},
-                fadeOut = {time = 0.3, alpha = 0.2},
+                fadeOut = {time = 0.3, alpha = 0},
             },
         },
         altpower = {
@@ -679,10 +690,10 @@ cfg.framesLocked = true
 -- player specific data
 ----------------------------------------
 --player stuff
-cfg.playername = UnitName("player")
+cfg.playername  = UnitName("player")
 cfg.playerclass = select(2, UnitClass("player"))
 cfg.playercolor = RAID_CLASS_COLORS[cfg.playerclass]
-cfg.playerspec = GetSpecialization()
+cfg.playerspec  = GetSpecialization()
 
 ----------------------------------------
 -- other

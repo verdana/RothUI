@@ -498,38 +498,43 @@ local createStyle = function(self)
         CastingBarFrame:Hide()
     end
 
-    --mage bars
+    -- mage bars
     if cfg.playerclass == "MAGE" and self.cfg.arcanecharges.show then
         bars.CreateArcaneChargesPowerBar(self)
     end
 
-    --warlock bars
+    -- warlock bars
     if cfg.playerclass == "WARLOCK" and self.cfg.soulshards.show then
         bars.CreateSoulShardPowerBar(self)
     end
 
-    --holypower
+    -- holypower
     if cfg.playerclass == "PALADIN" and self.cfg.holypower.show then
         bars.CreateHolyPowerBar(self)
     end
 
-    --harmony
+    -- harmony
     if cfg.playerclass == "MONK" and self.cfg.harmony.show then
         bars.CreateHarmonyPowerBar(self)
     end
 
-    --runes
+    -- runes
     if cfg.playerclass == "DEATHKNIGHT" and self.cfg.runes.show then
         --position deathknight runes
         bars.CreateRuneBar(self)
     end
 
-    --combobar
+    -- classpower
+    if self.cfg.classpower.show then
+        bars.CreateClassPowerBar(self)
+    end
+
+    -- combobar
     if self.cfg.combobar.show then
         bars.CreateComboBar(self)
     end
 
-    --create portrait
+    -- create portrait
     if self.cfg.portrait.show then
         func.CreateStandAlonePortrait(self)
     end
