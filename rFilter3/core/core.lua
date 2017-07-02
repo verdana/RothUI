@@ -1,26 +1,36 @@
-
 ---------------------------------------
 -- INIT
 ---------------------------------------
 
---get the addon namespace
 local addon, ns = ...
---get the config values
 local cfg = ns.cfg
 local dragFrameList = ns.dragFrameList
-
-local rf3_BuffList, rf3_DebuffList, rf3_CooldownList = cfg.rf3_BuffList, cfg.rf3_DebuffList, cfg.rf3_CooldownList
+-- local rf3_BuffList, rf3_DebuffList, rf3_CooldownList = cfg.rf3_BuffList, cfg.rf3_DebuffList, cfg.rf3_CooldownList
+local rf3_BuffList, rf3_DebuffList, rf3_CooldownList = {}, {}, {}
 
 -----------------------------
 -- FUNCTIONS
 -----------------------------
+
+-- 以t2作为模板，将值合并到t1中
+-- 仅合并t1中不存在的键值对
+function MergeTable(t1, t2)
+    for k, v in pairs(t2) do
+        if type(v) == "table" then
+            t1[k] = MergeTable(t1[k] or {}, t2[k] or {})
+        elseif not t1[k] then
+            t1[k] = v
+        end
+    end
+    return t1
+end
 
 --petbattle handler
 local VisibilityHandler = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 RegisterStateDriver(VisibilityHandler, "visibility", "[petbattle][overridebar][vehicleui][possessbar] hide; show")
 
 --format time func
-local function GetFormattedTime(time)
+local GetFormattedTime = function(time)
     if time <= 0 then
         return ""
     elseif time < 2 then
@@ -404,7 +414,6 @@ local SearchAuras = function()
     for i,_ in ipairs(rf3_BuffList) do
         local f = rf3_BuffList[i]
         if f.spelllist and f.spelllist[1] then
-            --print('buff spelllist exists')
             f.aurafound = false
             for k,spellid in ipairs(f.spelllist) do
                 if not f.aurafound then
@@ -421,7 +430,6 @@ local SearchAuras = function()
     for i,_ in ipairs(rf3_DebuffList) do
         local f = rf3_DebuffList[i]
         if  f.spelllist and f.spelllist[1] then
-            --print('debuff spelllist exists')
             f.aurafound = false
             for k,spellid in ipairs(f.spelllist) do
                 if not f.aurafound then
@@ -459,47 +467,80 @@ end
 -- CALL
 -----------------------------
 
-local aura_count = 0
-local cooldown_count = 0
-
-for i,_ in ipairs(rf3_BuffList) do
-    local f = rf3_BuffList[i]
-    if not f.icon then
-        CreateIcon(f,i,"Buff")
-    end
-    aura_count=aura_count+1
-end
-
-for i,_ in ipairs(rf3_DebuffList) do
-    local f = rf3_DebuffList[i]
-    if not f.icon then
-        CreateIcon(f,i,"Debuff")
-    end
-    aura_count=aura_count+1
-end
-
-for i,_ in ipairs(rf3_CooldownList) do
-    local f = rf3_CooldownList[i]
-    if not f.icon then
-        CreateIcon(f,i,"Cooldown")
-    end
-    cooldown_count=cooldown_count+1
-end
-
-if (aura_count+cooldown_count) > 0 then
-    local a    = CreateFrame("Frame")
-    local ag   = a:CreateAnimationGroup()
-    local anim = ag:CreateAnimation()
-    anim:SetDuration(cfg.updatetime)
-    ag:SetLooping("REPEAT")
-    ag:SetScript("OnLoop", function(self, event, ...)
-        if aura_count > 0 then
-            SearchAuras()
+-----------------------------
+-- Apply config by spec
+-----------------------------
+cfg:RegisterEvent("PLAYER_LOGIN")
+cfg:SetScript("OnEvent", function(self, event, ...)
+    if event == "PLAYER_LOGIN" then
+        local id, name = GetSpecializationInfo(GetSpecialization())
+        if not self.player_spec or not self.player_spec[id] then
+            return
         end
-        if cooldown_count > 0 then
-            SearchCooldowns()
+
+        -- 合并配置表
+        if self.player_spec[id].buff then
+            for k, v in pairs(self.player_spec[id].buff) do
+                rf3_BuffList[k] = MergeTable(v, cfg.Buff)
+            end
         end
-    end)
-    ag:Play()
-end
+        if self.player_spec[id].debuff then
+            for k, v in pairs(self.player_spec[id].debuff) do
+                rf3_DebuffList[k] = MergeTable(v, cfg.Debuff)
+            end
+        end
+        if self.player_spec[id].cooldown then
+            for k, v in pairs(self.player_spec[id].cooldown) do
+                rf3_CooldownList[k] = MergeTable(v, cfg.Cooldown)
+            end
+        end
+
+        -- 创建技能图标
+        local aura_count     = 0
+        local cooldown_count = 0
+
+        for i,_ in ipairs(rf3_BuffList) do
+            local f = rf3_BuffList[i]
+            if not f.icon then
+                CreateIcon(f,i,"Buff")
+            end
+            aura_count=aura_count+1
+        end
+
+        for i,_ in ipairs(rf3_DebuffList) do
+            local f = rf3_DebuffList[i]
+            if not f.icon then
+                CreateIcon(f,i,"Debuff")
+            end
+            aura_count=aura_count+1
+        end
+
+        for i,_ in ipairs(rf3_CooldownList) do
+            local f = rf3_CooldownList[i]
+            if not f.icon then
+                CreateIcon(f,i,"Cooldown")
+            end
+            cooldown_count=cooldown_count+1
+        end
+
+        if (aura_count+cooldown_count) > 0 then
+            local a    = CreateFrame("Frame")
+            local ag   = a:CreateAnimationGroup()
+            local anim = ag:CreateAnimation()
+            anim:SetDuration(cfg.updatetime)
+            ag:SetLooping("REPEAT")
+            ag:SetScript("OnLoop", function(self, event, ...)
+                if aura_count > 0 then
+                    SearchAuras()
+                end
+                if cooldown_count > 0 then
+                    SearchCooldowns()
+                end
+            end)
+            ag:Play()
+        end
+
+        -- self:UnregisterEvent("PLAYER_LOGIN")
+    end
+end)
 

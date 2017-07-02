@@ -1,44 +1,77 @@
 
-  -- // rFilter3
-  -- // zork - 2012
+-- // rFilter3
+-- // zork - 2012
 
-  --get the addon namespace
-  local addon, ns = ...
+local addon, ns = ...
+local cfg = CreateFrame("Frame")
+ns.cfg = cfg
 
-  --object container
-  local cfg = CreateFrame("Frame")
-  ns.cfg = cfg
+-- 玩家
+cfg.player_spec  = {}
+cfg.player_class = select(2, UnitClass("player"))
 
-  cfg.rf3_BuffList, cfg.rf3_DebuffList, cfg.rf3_CooldownList = {}, {}, {}
+-- 增益模板
+cfg.rf3_BuffList = {}
+cfg.Buff = {
+    spellid       = nil,
+    spec          = nil,
+    size          = 36,
+    pos           = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 0, y = 0 },
+    unit          = "player",
+    validate_unit = false,
+    ismine        = true,
+    desaturate    = true,
+    hide_ooc      = true,
+    move_ingame   = true,
+    alpha = {
+        found     = { frame = 0.8, icon = 0.8 },
+        not_found = { frame = 0.0, icon = 0.0 },
+    },
+}
 
-  --local player_name, _ = UnitName("player")
-  local _, player_class = UnitClass("player")
+-- 减益模板
+cfg.rf3_DebuffList = {}
+cfg.Debuff = {
+    spellid       = nil,
+    spec          = nil,
+    size          = 36,
+    pos           = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 0, y = 0 },
+    unit          = "target",
+    validate_unit = false,
+    ismine        = true,
+    desaturate    = true,
+    hide_ooc      = true,
+    move_ingame   = true,
+    alpha = {
+        found     = { frame = 0.8, icon = 0.8 },
+        not_found = { frame = 0.0, icon = 0.0 },
+    },
+}
 
-  -----------------------------
-  -- DEFAULT CONFIG
-  -----------------------------
+-- 冷却模板
+cfg.rf3_CooldownList = {}
+cfg.Cooldown = {
+    spellid          = nil,
+    spelllist        = {},
+    spec             = nil,
+    size             = 36,
+    pos              = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 0, y = 0 },
+    visibility_state = nil,
+    desaturate       = true,
+    hide_ooc         = true,
+    move_ingame      = true,
+    alpha = {
+        cooldown    = { frame = 1.0,  icon = 0.6 },
+        no_cooldown = { frame = 1.0,  icon = 1.0 },
+    },
+}
 
-  cfg.highlightPlayerSpells = true  --player spells will have a blue border
-  cfg.updatetime            = 0.1   --how fast should the timer update itself
-  cfg.timeFontSize          = 15
-  cfg.countFontSize         = 18
+-----------------------------
+-- DEFAULT CONFIG
+-----------------------------
 
-  --warrior defaults
-  if player_class == "WARRIOR" then
-    --default warrior buffs
-    cfg.rf3_BuffList = {}
-    --default warrior debuffs
-    cfg.rf3_DebuffList = {}
-    --default warrior cooldowns
-    cfg.rf3_CooldownList = {}
-  end
+cfg.highlightPlayerSpells = true  -- player spells will have a blue border
+cfg.updatetime            = 0.1   -- how fast should the timer update itself
+cfg.timeFontSize          = 15
+cfg.countFontSize         = 18
 
-  --rogue defaults
-  if player_class == "ROGUE" then
-    --default rogue buffs
-    cfg.rf3_BuffList = {}
-    --default rogue debuffs
-    cfg.rf3_DebuffList = {}
-    --default rogue cooldowns
-    cfg.rf3_CooldownList = {}
-  end

@@ -5,6 +5,19 @@
 ## RequiredDeps: rLib
 
 config.lua
-charspecific.lua
+config\deathknight.lua
+config\demonhunter.lua
+config\druid.lua
+config\hunter.lua
+config\mage.lua
+config\monk.lua
+config\paladin.lua
+config\priest.lua
+config\rogue.lua
+config\shaman.lua
+config\warlock.lua
+config\warrior.lua
+
 core\slashcmd.lua
 core\core.lua
+
