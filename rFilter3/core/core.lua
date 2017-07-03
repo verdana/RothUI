@@ -366,7 +366,7 @@ local CheckCooldown = function(f)
         f.iconframe:SetAlpha(1)
         f.iconframe.icon:SetDesaturated(nil)
         f.iconframe.time:SetText("30m")
-        f.iconframe.count:SetText("3")
+        f.iconframe.count:SetText("")
         return
     end
     if not InCombatLockdown() and f.hide_ooc then
@@ -396,8 +396,8 @@ local CheckCooldown = function(f)
             else
                 f.iconframe:SetAlpha(f.alpha.no_cooldown.frame)
                 f.iconframe.icon:SetAlpha(f.alpha.no_cooldown.icon)
-                f.iconframe.time:SetText("RDY")
-                f.iconframe.count:SetText("")
+                f.iconframe.time:SetText("R")
+                f.iconframe.count:SetText(GetSpellCharges(f.spellid))
                 f.iconframe.time:SetTextColor(0, 0.8, 0)
                 f.iconframe.border:SetVertexColor(0.4,0.6,0.2,1)
                 if f.desaturate then
