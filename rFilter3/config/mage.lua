@@ -24,6 +24,30 @@ cfg.player_spec[63] = {
     debuff = {
     },
     cooldown = {
+        {
+            spellid = 194466,   -- 凤凰烈焰
+            pos     = { x = 200, y = -50 },
+        },
+        {
+            spellid = 108853,   -- 火焰冲击
+            pos     = { x = 250, y = -50 },
+        },
+        {
+            spellid = 31661,    -- 龙息术
+            pos     = { x = 300, y = -50 },
+        },
+        {
+            spellid = 190319,   -- 燃烧
+            pos     = { x = 350, y = -50 },
+        },
+        {
+            spellid = 55342,    -- 镜像
+            pos     = { x = 400, y = -50 },
+        },
+        {
+            spellid = 80353,    -- 时间扭曲
+            pos     = { x = 450, y = -50 },
+        },
     },
 }
 
