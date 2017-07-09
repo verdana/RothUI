@@ -38,3 +38,6 @@ function dump(o)
    end
 end
 
+-- 关闭 TalkingHead 太烦人了！
+UIParent:UnregisterEvent("TALKINGHEAD_REQUESTED")
+
