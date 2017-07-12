@@ -5,8 +5,6 @@
 local addon, ns = ...
 local cfg = ns.cfg
 local dragFrameList = ns.dragFrameList
--- local rf3_BuffList, rf3_DebuffList, rf3_CooldownList = cfg.rf3_BuffList, cfg.rf3_DebuffList, cfg.rf3_CooldownList
-local rf3_BuffList, rf3_DebuffList, rf3_CooldownList = {}, {}, {}
 
 -----------------------------
 -- FUNCTIONS
@@ -471,8 +469,14 @@ end
 -- Apply config by spec
 -----------------------------
 cfg:RegisterEvent("PLAYER_LOGIN")
+cfg:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 cfg:SetScript("OnEvent", function(self, event, ...)
-    if event == "PLAYER_LOGIN" then
+    if event == "PLAYER_LOGIN" or event == "PLAYER_SPECIALIZATION_CHANGED" then
+
+        rf3_BuffList = {}
+        rf3_DebuffList = {}
+        rf3_CooldownList = {}
+
         local id, name = GetSpecializationInfo(GetSpecialization())
         if not self.player_spec or not self.player_spec[id] then
             return
@@ -540,7 +544,7 @@ cfg:SetScript("OnEvent", function(self, event, ...)
             ag:Play()
         end
 
-        -- self:UnregisterEvent("PLAYER_LOGIN")
+        self:UnregisterEvent("PLAYER_LOGIN")
     end
 end)
 
