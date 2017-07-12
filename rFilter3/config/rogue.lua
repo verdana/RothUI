@@ -9,8 +9,18 @@ if cfg.player_class ~= "ROGUE" then return end
 
 -- 刺杀
 cfg.player_spec[259] = {
-    buff = {},
-    debuff = {},
+    buff = {
+        {
+            spellid = 215126,   -- 黏性物质
+            pos     = { x = 250, y = 50 },
+        }
+    },
+    debuff = {
+        {
+            spellid = 1943,     -- 割裂
+            pos     = { x = 200, y = 50 },
+        }
+    },
     cooldown = {
         {
             spellid = 192759,   -- 君王之灾
