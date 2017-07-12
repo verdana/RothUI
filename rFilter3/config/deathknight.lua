@@ -55,12 +55,12 @@ cfg.player_spec[252] = {
 
     debuff = {
         {
-            spellid = 191587,  -- 恶性瘟疫
+            spellid = 194310,  -- 溃烂之伤
             pos     = { x = 200, y = 50 },
             unit    = "target",
         },
         {
-            spellid = 194310,  -- 溃烂之伤
+            spellid = 191587,  -- 恶性瘟疫
             pos     = { x = 250, y = 50 },
             unit    = "target",
         },
@@ -76,12 +76,16 @@ cfg.player_spec[252] = {
             pos     = { x = 250, y = -50 },
         },
         {
-            spellid = 63560,    -- 黑暗突变
+            spellid = 194918,   -- 符文武器
             pos     = { x = 300, y = -50 },
         },
         {
-            spellid = 207349,    -- 黑暗仲裁者
+            spellid = 63560,    -- 黑暗突变
             pos     = { x = 350, y = -50 },
+        },
+        {
+            spellid = 207349,   -- 黑暗仲裁者
+            pos     = { x = 400, y = -50 },
         }
     },
 }
