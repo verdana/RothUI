@@ -471,8 +471,7 @@ end
 cfg:RegisterEvent("PLAYER_LOGIN")
 cfg:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 cfg:SetScript("OnEvent", function(self, event, ...)
-    if event == "PLAYER_LOGIN" or event == "PLAYER_SPECIALIZATION_CHANGED" then
-
+    if event == "PLAYER_LOGIN" or (event == "PLAYER_SPECIALIZATION_CHANGED" and ... == "player") then
         rf3_BuffList = {}
         rf3_DebuffList = {}
         rf3_CooldownList = {}
