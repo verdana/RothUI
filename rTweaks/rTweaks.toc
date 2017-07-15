@@ -3,7 +3,7 @@
 ## Version: 1.0.0
 ## Author: Verdana
 ## Notes: Small improvements to the default UI.
-## SavedVariables: QuestsDB, PetsDB
+## SavedVariables: MountsDB, PetsDB, QuestsDB
 
 rTweaks.lua
 

@@ -55,20 +55,17 @@ SlashCmdList["MOUNT"] = function(msg)
     -- 如果在飞行中，防止手贱误操作摔死
     if IsFlying() then return end
 
-    -- 在德拉诺的纳格兰，如果可以优先使用霜狼战狼/塔拉塔布羊
-    -- 可以在战斗中使用的
-    if not IsFlyableArea() and GetCurrentMapContinent() == 7 and GetZoneText() == "纳格兰" then
-        -- 检查当前要塞技能 ID 是否为战狼
-        local spellID = DraenorZoneAbilityFrame.SpellButton.currentSpellID or 0
-        -- 部落 / 联盟
-        if spellID == 164222 or spellID == 165803 then
-            CastSpellByName("要塞技能")
-            return
-        end
-    end
-
-    -- 其它情况需要检测是否在战斗中
+    -- 检测是否在战斗中
     if InCombatLockdown() then return end
+
+    -- 优先离开载具
+    if CanExitVehicle() then VehicleExit() end
+
+    -- 离开坐骑
+    if IsMounted() then
+        C_MountJournal.Dismiss()
+        return
+    end
 
     -- 万圣节使用魔法扫帚
     if GetItemCount(37011) >= 1 then
@@ -80,8 +77,27 @@ SlashCmdList["MOUNT"] = function(msg)
     local map = GetMapInfo()
     if map and strsub(map, 0, 7) == "Vashjir" and IsUsableSpell(75207) then
         CastSpellByName(GetSpellInfo(75207))
-    else
+        return
+    end
+
+    -- 游泳时使用暴雪自己的 API
+    if IsSwimming() then
         C_MountJournal.SummonByID(0)
+        return
+    end
+
+    -- 可飞行区域
+    if IsFlyableArea() then
+        local n = math.random(#MountsDB["flyable"])
+        C_MountJournal.SummonByID(MountsDB["flyable"][n])
+        return
+    end
+
+    -- 不可飞行的区域
+    if not IsFlyableArea() then
+        local n = math.random(#MountsDB["ground"])
+        C_MountJournal.SummonByID(MountsDB["ground"][n])
+        return
     end
 end
 
