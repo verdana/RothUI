@@ -162,6 +162,9 @@ do
         -- 显示脚本错误 --
         SetCVar("scriptErrors", 1)
 
+        -- 激活插件错误日志
+        SetCVar('taintLog', 1)
+
         -- 截图质量
         SetCVar("screenshotQuality", 10)
         SetCVar("screenshotFormat", "jpg")
