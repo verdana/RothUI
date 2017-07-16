@@ -75,8 +75,38 @@ cfg.player_spec[260] = {
 
 -- 敏锐
 cfg.player_spec[261] = {
-    buff = {},
+    buff = {
+        {
+            spellid = 185422,   -- 暗影之舞
+            pos     = { x = 200, y = 50 },
+        },
+        {
+            spellid = 197498,   -- 夜刃
+            pos     = { x = 250, y = 50 },
+        },
+        {
+            spellid = 197496,   -- 终结技：剔骨
+            pos     = { x = 300, y = 50 },
+        },
+    },
     debuff = {},
-    cooldown = {},
+    cooldown = {
+        {
+            spellid = 209782,   -- 赤喉之咬
+            pos     = { x = 200, y = -50 },
+        },
+        {
+            spellid = 185313,   -- 暗影之舞
+            pos     = { x = 250, y = -50 },
+        },
+        {
+            spellid = 212283,   -- 死亡符记
+            pos     = { x = 300, y = -50 },
+        },
+        {
+            spellid = 121471,   -- 暗影之力
+            pos     = { x = 350, y = -50 },
+        },
+    },
 }
 
