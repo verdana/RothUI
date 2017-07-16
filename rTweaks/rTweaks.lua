@@ -19,10 +19,12 @@ function Tweak:ADDON_LOADED(event, name)
     -- /mount 命令会用到
     -- 暴雪的 API C_MountJournal.SummonByID(0);
     -- 在有些地图中无法正确判断是否可以飞行
-    MountsDB = {
-        ["ground"]  = {},
-        ["flyable"] = {},
-    }
+    if not MountsDB then
+        MountsDB = {
+            ["ground"]  = {},
+            ["flyable"] = {},
+        }
+    end
     local mountIDs = C_MountJournal.GetMountIDs();
     for i, mountID in ipairs(mountIDs) do
         local _, spellID, _, _, isUsable, _, isFavorite, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfoByID(mountID)
