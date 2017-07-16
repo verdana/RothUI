@@ -65,6 +65,10 @@ AutoRaidMode:RegisterEvent('ZONE_CHANGED')
 AutoRaidMode:RegisterEvent('ZONE_CHANGED_INDOORS')
 AutoRaidMode:RegisterEvent('ZONE_CHANGED_NEW_AREA')
 AutoRaidMode:SetScript('OnEvent', function(self, event, ...)
+
+    -- 如果玩家已经在战场，竞技场，副本，团队副本中
+    if IsInInstance() then return end
+
     local zoneText = GetMinimapZoneText()
     if Dungeons[zoneText] then
         SetDungeonDifficultyID(Dungeons[zoneText])
