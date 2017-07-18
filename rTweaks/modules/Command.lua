@@ -86,6 +86,12 @@ SlashCmdList["MOUNT"] = function(msg)
         return
     end
 
+    -- 检查数据库
+    if not MountsDB["flyable"] or not MountsDB["ground"] then
+        DEFAULT_CHAT_FRAME:AddMessage("尚未扫描偏好坐骑列表", YELLOW_FONT_COLOR.r, YELLOW_FONT_COLOR.g, YELLOW_FONT_COLOR.b)
+        return
+    end
+
     -- 可飞行区域
     if IsFlyableArea() then
         local n = math.random(#MountsDB["flyable"])

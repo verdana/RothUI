@@ -1,0 +1,9 @@
+## Interface: 70200
+## Title: rMount
+## Version: 1.0.0
+## Author: Verdana
+## Notes: Summon random favorite mounts
+## LoadOnDemand: 1
+## LoadWith: Blizzard_Collections
+
+rMount.lua
