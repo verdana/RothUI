@@ -9,14 +9,16 @@ rMount:RegisterEvent("ADDON_LOADED")
 function CreateScanButton()
     local button = CreateFrame("Button", "MountJournalScanButton", MountJournal, "MagicButtonTemplate")
     button:SetText("扫描")
-    button:SetPoint("BOTTOMRIGHT", -10, 5)
-    button:SetWidth(100)
-    button:SetHeight(22)
+    button:SetPoint("BOTTOMRIGHT")
+    button:SetSize(140, 22)
+    MagicButton_OnLoad(button)  -- magic button should be created in xml
+    button.RightSeparator:Hide()
 
     -- 添加鼠标提示
     button:SetScript("OnEnter", function(self)
-        GameTooltip:SetOwner(self, "ANCHOR_TOP");
-        GameTooltip:SetText("扫描偏好的坐骑，之后可以使用 /mount 宏召唤坐骑")
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+        GameTooltip:SetText("扫描坐骑", 1, 1, 1);
+        GameTooltip:AddLine("扫描偏好的坐骑，之后可以使用 /mount 宏随机召唤坐骑了", nil, nil, nil, true)
         GameTooltip:Show()
     end)
     button:SetScript("OnLeave", function()
@@ -58,7 +60,7 @@ function ScanMounts()
         end
     end
 
-    print(string.format("扫描完毕，您总共收藏了 %d 只坐骑！", count))
+    DEFAULT_CHAT_FRAME:AddMessage(string.format("扫描完毕，您总共收藏了 %d 只坐骑！", count), YELLOW_FONT_COLOR.r, YELLOW_FONT_COLOR.g, YELLOW_FONT_COLOR.b)
 end
 
 -- 事件方法
