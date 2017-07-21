@@ -1,4 +1,3 @@
-
 -----------------------------
 -- INIT
 -----------------------------
@@ -103,4 +102,6 @@ end
 if cfg.mouseover.enable then
     rButtonBarFader(frame, buttonList, cfg.mouseover.fadeIn, cfg.mouseover.fadeOut) --frame, buttonList, fadeIn, fadeOut
 end
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
 

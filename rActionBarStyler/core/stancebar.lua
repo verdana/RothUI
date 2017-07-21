@@ -1,4 +1,3 @@
-
 -----------------------------
 -- INIT
 -----------------------------
@@ -87,4 +86,6 @@ end
 if cfg.combat.enable then
     rCombatFrameFader(frame, cfg.combat.fadeIn, cfg.combat.fadeOut) --frame, buttonList, fadeIn, fadeOut
 end
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
 
