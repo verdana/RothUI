@@ -23,6 +23,6 @@ ns.addonShortcut    = shortcut
 SlashCmdList[shortcut] = rCreateSlashCmdFunction(addon, shortcut, dragFrameList, color)
 SLASH_rbfs1 = "/"..shortcut; --the value in the between SLASH_ and NUMBER has to match the value of shortcut
 
-print("|c"..color..addon.." loaded.|r")
+-- print("|c"..color..addon.." loaded.|r")
 print("|c"..color.."\/"..shortcut.."|r to display the command list")
 

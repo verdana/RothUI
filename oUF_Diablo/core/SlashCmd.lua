@@ -174,6 +174,6 @@ end
 SlashCmdList["diablo"] = SlashCmd;
 SLASH_diablo1 = "/diablo";
 
-print("|c00FF3300oUF_Diablo loaded.|r")
+-- print("|c00FF3300oUF_Diablo loaded.|r")
 print("|c00FF3300\/diablo|r to display the command list")
 

@@ -22,7 +22,7 @@ ns.addonShortcut    = shortcut
 SlashCmdList[shortcut] = rCreateSlashCmdFunction(addon, shortcut, dragFrameList, color)
 SLASH_rabs1 = "/"..shortcut; --the value in the between SLASH_ and NUMBER has to match the value of shortcut
 
-print("|c"..color..addon.." loaded.|r")
+-- print("|c"..color..addon.." loaded.|r")
 print("|c"..color.."\/"..shortcut.."|r to display the command list")
 
 -- vim: set fdm=indent ts=4 sw=4 tw=0 et :
