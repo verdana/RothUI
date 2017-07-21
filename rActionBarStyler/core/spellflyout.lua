@@ -17,3 +17,6 @@ local function addFlyoutFramesToFader(self)
     end
 end
 SpellFlyout:HookScript("OnShow", addFlyoutFramesToFader)
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
+
