@@ -10,10 +10,30 @@ if cfg.player_class ~= "MAGE" then return end
 -- 奥术
 cfg.player_spec[62] = {
     buff = {
+        {
+            spellid  = 79683,	-- 奥术飞弹
+            pos      = { x = 200, y = 50 },
+        }
     },
     debuff = {
     },
     cooldown = {
+        {
+            spellid = 224968,   -- 艾露尼斯的印记
+            pos     = { x = 200, y = -50 },
+        },
+        {
+            spellid = 205032,   -- 精力充沛
+            pos     = { x = 250, y = -50 },
+        },
+        {
+            spellid = 12042,    -- 奥术强化
+            pos     = { x = 300, y = -50 },
+        },
+        {
+            spellid = 205025,   -- 气定神闲
+            pos     = { x = 350, y = -50 },
+        },
     },
 }
 
