@@ -45,7 +45,7 @@ button:SetScript("OnEvent", function(self)
     else
         self:SetHighlightTexture([[Interface\Buttons\ButtonHilight-Square]], "ADD")
         self:UnlockHighlight()
-        self:Hide()
+        -- self:Hide()
     end
 end)
 
