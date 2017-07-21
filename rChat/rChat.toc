@@ -9,3 +9,4 @@ core\scroll.lua
 core\channelreplacements.lua
 core\altinvite.lua
 core\urlcopy.lua
+

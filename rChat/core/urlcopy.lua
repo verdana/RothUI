@@ -75,3 +75,6 @@ function ChatFrame_OnHyperlinkShow(frame, link, text, button)
         orig(self, link, text, button)
     end
 end
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
+

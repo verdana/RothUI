@@ -42,3 +42,6 @@ for i = 1, NUM_CHAT_WINDOWS do
         end
     end
 end
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
+

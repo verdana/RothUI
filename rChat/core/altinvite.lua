@@ -8,3 +8,4 @@ SetItemRef = function(link, text, button)
     end
     return origSetItemRef(link, text, button)
 end
+

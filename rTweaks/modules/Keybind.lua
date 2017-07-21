@@ -1,4 +1,3 @@
-
 local frame = CreateFrame("frame") do
     frame:SetScript("OnEvent", function(self, event, ...)
         self[event](self, event, ...)
@@ -21,8 +20,8 @@ end
 SLASH_KB1="/kb"
 SlashCmdList["KB"] = function(msg)
     local cmd, arg = string.split(" ", msg, 2)
-	cmd = string.lower(cmd or "")
-	arg = arg or ""
+    cmd = string.lower(cmd or "")
+    arg = arg or ""
 
     -- 保存当前按键设定
     if cmd == "save" then
@@ -61,3 +60,4 @@ SlashCmdList["KB"] = function(msg)
         print("Reset your key binds.")
     end
 end
+

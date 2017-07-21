@@ -89,3 +89,6 @@ local function OnEvent(self, event, ...) -- Event handler
 	end
 end
 f:SetScript("OnEvent", OnEvent)
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
+

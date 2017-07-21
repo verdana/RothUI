@@ -1,4 +1,3 @@
-﻿
 -- // rActionButtonStyler
 -- // zork - 2012
 
@@ -76,4 +75,6 @@ cfg.font = STANDARD_TEXT_FONT
 
 --hand the config to the namespace for usage in other lua files (remember: those lua files must be called after the cfg.lua)
 ns.cfg = cfg
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
 

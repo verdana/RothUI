@@ -37,19 +37,19 @@ end
 -- http://www.wowwiki.com/ColorGradient
 local ColorGradient = function(perc, ...)
     if perc >= 1 then
-		local r, g, b = select(select('#', ...) - 2, ...)
-		return r, g, b
-	elseif perc <= 0 then
-		local r, g, b = ...
-		return r, g, b
-	end
+        local r, g, b = select(select('#', ...) - 2, ...)
+        return r, g, b
+    elseif perc <= 0 then
+        local r, g, b = ...
+        return r, g, b
+    end
 
-	local num = select('#', ...) / 3
+    local num = select('#', ...) / 3
 
-	local segment, relperc = math.modf(perc*(num-1))
-	local r1, g1, b1, r2, g2, b2 = select((segment*3)+1, ...)
+    local segment, relperc = math.modf(perc*(num-1))
+    local r1, g1, b1, r2, g2, b2 = select((segment*3)+1, ...)
 
-	return r1 + (r2-r1)*relperc, g1 + (g2-g1)*relperc, b1 + (b2-b1)*relperc
+    return r1 + (r2-r1)*relperc, g1 + (g2-g1)*relperc, b1 + (b2-b1)*relperc
 end
 
 --petbattle handler
@@ -256,4 +256,6 @@ a:SetScript("OnEvent", function(self, event, ...)
         startSearch(self)
     end
 end)
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
 

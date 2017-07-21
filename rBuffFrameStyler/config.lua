@@ -93,3 +93,5 @@ cfg.debuffFrame = {
     },
 }
 
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
+

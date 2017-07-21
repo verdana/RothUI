@@ -13,3 +13,4 @@ FloatingChatFrame_OnMouseScroll = function(self, dir)
         end
     end
 end
+

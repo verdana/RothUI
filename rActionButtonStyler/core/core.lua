@@ -1,4 +1,4 @@
-﻿---------------------------------------
+---------------------------------------
 -- VARIABLES
 ---------------------------------------
 --get the addon namespace
@@ -381,3 +381,6 @@ end
 local a = CreateFrame("Frame")
 a:RegisterEvent("PLAYER_LOGIN")
 a:SetScript("OnEvent", init)
+
+-- vim: set fdm=indent ts=4 sw=4 tw=0 et :
+
