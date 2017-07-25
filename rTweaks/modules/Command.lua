@@ -92,19 +92,22 @@ SlashCmdList["MOUNT"] = function(msg)
         return
     end
 
+    -- 无法飞行，但 IsFlyableArea() 却返回 true 的区域
+    local notFlyableAreas = {
+        ["ValhallasWarriorOrderHome"] = true,   -- 战士职业大厅
+    }
+
     -- 可飞行区域
-    if IsFlyableArea() then
+    if IsFlyableArea() and notFlyableAreas[GetMapInfo()] == nil then
         local n = math.random(#MountsDB["flyable"])
         C_MountJournal.SummonByID(MountsDB["flyable"][n])
         return
     end
 
     -- 不可飞行的区域
-    if not IsFlyableArea() then
-        local n = math.random(#MountsDB["ground"])
-        C_MountJournal.SummonByID(MountsDB["ground"][n])
-        return
-    end
+    local n = math.random(#MountsDB["ground"])
+    C_MountJournal.SummonByID(MountsDB["ground"][n])
+    return
 end
 
 -- 导出所有宠物信息
