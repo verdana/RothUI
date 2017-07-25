@@ -1,3 +1,14 @@
+**Changes in 7.0.6:**
+
+- _Belzaru (3):_
+    1. Change units and percent calculation to be relative to maximum cast
+    2. Remove unnecessary code and rename variable.
+    3. Remove unnecessary Show.
+- _Rainrider (2):_
+    1. threatindicator: asure the element has SetVertexColor before using it
+    2. stagger: add a nil check for UnitStagger (#392)
+- 3 files changed, 12 insertions(+), 14 deletions(-)
+
 **Changes in 7.0.5:**
 
 - _Val Voronov (1):_
@@ -64,7 +75,7 @@
     2. totems: Use actual number of totem sub-widgets instead of MAX_TOTEMS
 - _Phanx (1):_
     1. health: Ignore updates with nil unit (Blizz bug in 7.1) (#319)
-- _Rainrider (29):_
+- _Rainrider (24):_
     1. core:  update the pet frame properly after entering/exiting a vehicle
     2. power: Allow using atlases
     3. castbar: add a .holdTime option
@@ -78,22 +89,17 @@
     11. castbar: set .Text for failed and interrupted casts accordingly
     12. castbar: pass the spellid to Post* hooks where applicable
     13. castbar: add .timeToHold option
-    14. range: update documentation
-    15. runes: update documentation
-    16. stagger: update documentation
-    17. totems: update documentation
-    18. additionalpower: update documentation
-    19. alternativepower: update documentation
-    20. classpower: update documentation
-    21. auras: update documentation
-    22. castbar: update documentation
-    23. tags: update documentation
-    24. core: update documentation
-    25. portrait: check for PlayerModel instead of Model
-    26. range: minor cleanup
-    27. raidroleindicator: make sure all update paths trigger Pre|PostUpdate
-    28. masterlooterindicator: make sure all update paths trigger Pre|PostUpdate
-    29. runes: update docs
+    14. alternativepower: update documentation
+    15. classpower: update documentation
+    16. auras: update documentation
+    17. castbar: update documentation
+    18. tags: update documentation
+    19. core: update documentation
+    20. portrait: check for PlayerModel instead of Model
+    21. range: minor cleanup
+    22. raidroleindicator: make sure all update paths trigger Pre|PostUpdate
+    23. masterlooterindicator: make sure all update paths trigger Pre|PostUpdate
+    24. runes: update docs
 - _Sticklord (1):_
     1. core: Change the framestrata to LOW
 - _Val Voronov (19):_
