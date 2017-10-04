@@ -42,14 +42,14 @@ local playTargetSound = function(self, event)
     if event == "PLAYER_TARGET_CHANGED" then
         if (UnitExists(self.unit)) then
             if (UnitIsEnemy(self.unit, "player")) then
-                PlaySound("igCreatureAggroSelect")
+                PlaySound(SOUNDKIT.IG_CREATURE_AGGRO_SELECT)
             elseif (UnitIsFriend("player", self.unit)) then
-                PlaySound("igCharacterNPCSelect")
+                PlaySound(SOUNDKIT.IG_CHARACTER_NPC_SELECT)
             else
-                PlaySound("igCreatureNeutralSelect")
+                PlaySound(SOUNDKIT.IG_CREATURE_NEUTRAL_SELECT)
             end
         else
-            PlaySound("INTERFACESOUND_LOSTTARGETUNIT")
+            PlaySound(SOUNDKIT.INTERFACE_SOUND_LOST_TARGET_UNIT)
         end
     end
 end
