@@ -1,7 +1,7 @@
-## Interface: 70200
+## Interface: 70300
 ## Author: zork
 ## Title: oUF_Diablo
-## Version: 70200.01
+## Version: 70300.01
 ## Notes: zork's oUF layout with Diablo flavour!
 ## RequiredDeps: rLib
 ## SavedVariables: OUF_DIABLO_DB_GLOB

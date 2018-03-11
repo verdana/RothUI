@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: rTweaks
 ## Version: 1.0.0
 ## Author: Verdana
@@ -17,6 +17,7 @@ modules\Command.lua
 modules\EquipItemLevel.lua
 modules\Font.lua
 modules\ImprovedMerchant.lua
+modules\ProfessionQuest.lua
 modules\ProfessionTabs.lua
 modules\ReagentBank.lua
 modules\TweakUI.lua

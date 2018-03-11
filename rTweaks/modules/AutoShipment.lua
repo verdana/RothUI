@@ -20,6 +20,7 @@ local markedFollowers = {
 
     -- 盗贼
     [907]   = true,     -- 海盗
+    [680]   = true,     -- 盗匪
     [681]   = true,     -- 迪菲亚盗贼
 
     -- 死亡骑士
